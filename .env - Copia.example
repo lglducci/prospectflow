@@ -1,0 +1,4 @@
+# URL pública da API. Produção: preferir /api atrás de proxy no mesmo domínio.
+VITE_API_BASE_URL=/api
+# Apenas no servidor de desenvolvimento (nunca incluir credenciais na URL).
+N8N_PROXY_TARGET=http://localhost:5678/webhook/
