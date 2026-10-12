@@ -1,0 +1,13 @@
+import {useEffect,useState} from 'react';
+import {useAuth} from '../auth/AuthContext';
+import {jsonRequest} from '../lib/http';
+import {buildWebhookUrl} from '../config/globals';
+export default function Company(){
+ const {session,restore}=useAuth();
+ const [form,setForm]=useState({nome:session.empresa.nome||'',documento:'',email_contato:'',telefone:'',cidade:'',uf:''});
+ const [busy,setBusy]=useState(false),[loading,setLoading]=useState(true),[loaded,setLoaded]=useState(false),[error,setError]=useState('');
+ useEffect(()=>{let alive=true;jsonRequest(buildWebhookUrl('prospectflow-empresa'),{acao:'OBTER_EMPRESA',payload:{}}).then(data=>{if(!data.empresa || typeof data.empresa.nome!=='string')throw new Error('Resposta de empresa inválida.');if(alive){setLoaded(true);setForm({nome:data.empresa.nome||'',documento:data.empresa.documento||'',email_contato:data.empresa.email_contato||'',telefone:data.empresa.telefone||'',cidade:data.empresa.cidade||'',uf:data.empresa.uf||''});}}).catch(e=>{if(alive)setError(e.message);}).finally(()=>{if(alive)setLoading(false);});return()=>{alive=false;};},[]);
+ async function save(e){e.preventDefault();setBusy(true);setError('');try{await jsonRequest(buildWebhookUrl('prospectflow-empresa'),{acao:'SALVAR_EMPRESA',payload:form});await restore();}catch(e){setError(e.message);}finally{setBusy(false);}}
+ function field(key,label,max,type='text'){return <label>{label}<input type={type} maxLength={max} required={key==='nome'} value={form[key]} onChange={e=>setForm(f=>({...f,[key]:key==='uf'?e.target.value.toUpperCase():e.target.value}))}/></label>;}
+ return <section className="content"><h1>Minha empresa</h1><p>Informações do seu espaço de trabalho.</p><form className="card narrow" onSubmit={save}><fieldset disabled={loading||busy||!loaded} style={{border:0,padding:0,margin:0}}>{field('nome','Nome da empresa',160)}{field('documento','CNPJ / CPF',32)}{field('email_contato','E-mail de contato',254,'email')}{field('telefone','Telefone',32,'tel')}<div className="columns">{field('cidade','Cidade',120)}{field('uf','UF',2)}</div><label>Responsável<input disabled value={session.usuario.nome||''}/></label><label>E-mail de acesso<input disabled value={session.usuario.email||''}/></label>{error&&<p className="error" role="alert">{error}</p>}<button className="primary">{loading?'Carregando…':busy?'Salvando…':'Salvar dados'}</button></fieldset></form></section>;
+}
