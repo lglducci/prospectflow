@@ -4,4 +4,4 @@ VITE_API_BASE_URL=/api
  
 
 VITE_API_BASE_URL=/api
-N8N_PROXY_TARGET= N8N_PROXY_TARGET= https://webhook.lglducci.com.br/webhook/
+N8N_PROXY_TARGET= N8N_PROXY_TARGET= https://webhook-homolog.lglducci.com.br/webhook/
