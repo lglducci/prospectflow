@@ -5186,10 +5186,10 @@ function abrirContatoDaAgenda(tarefa) {
          .pf-activities-compose { display: grid; gap: 10px; padding: 14px; border-top: 1px solid #e2e8f0; }
          .pf-activities-compose textarea { min-height: 80px; width: 100%; resize: vertical; padding: 10px; border: 1px solid #cbd5e1; border-radius: 7px; color: #334155; background: #fff; }
          .pf-activities-compose button { justify-self: end; }
-         .pf-page.is-dark .pf-activities-modal, .pf-page.is-dark .pf-activities-conversation { background: #111827; }
-         .pf-page.is-dark .pf-activities-table td { color: #e2e8f0; border-color: #334155; }
-         .pf-page.is-dark .pf-activities-table tbody tr:nth-child(even) { background: #1e293b; }
-         .pf-page.is-dark .pf-activities-tools input, .pf-page.is-dark .pf-activities-compose textarea { background: #1e293b; color: #e2e8f0; border-color: #475569; }
+         .pf-page.is-dark .pf-activities-modal, .pf-page.is-dark .pf-activities-conversation { background: #121c2e; }
+         .pf-page.is-dark .pf-activities-table td { color: #e2e8f0; border-color: #29364e; }
+         .pf-page.is-dark .pf-activities-table tbody tr:nth-child(even) { background: #17253c; }
+         .pf-page.is-dark .pf-activities-tools input, .pf-page.is-dark .pf-activities-compose textarea { background: #17253c; color: #e2e8f0; border-color: #29364e; }
          .pf-page.is-dark .pf-activities-table small, .pf-page.is-dark .pf-activities-tools span { color: #94a3b8; }
 
          #prospectflow-page, #prospectflow-page * { box-sizing: border-box; }
@@ -6087,88 +6087,88 @@ function abrirContatoDaAgenda(tarefa) {
 
          /* Tema escuro */
          .pf-page.is-dark {
-           --wa-app: #202c33;
-           --wa-panel: #111b21;
-           --wa-chat: #0b141a;
-           --wa-border: #2a3942;
+           --wa-app: #17253c;
+           --wa-panel: #121c2e;
+           --wa-chat: #0b1120;
+           --wa-border: #29364e;
            --wa-text: #e9edef;
            --wa-muted: #8696a0;
            --wa-outgoing: #005c4b;
-           --wa-incoming: #202c33;
-           background: #0b141a;
+           --wa-incoming: #17253c;
+           background: #0b1120;
            color: #e9edef;
          }
          .pf-page.is-dark .pf-header h1 { color: #e9edef; }
          .pf-page.is-dark .pf-header h1 + p { color: #8696a0; }
          .pf-page.is-dark .pf-header div[class*="uppercase"] { color: #53bdeb; }
-         .pf-page.is-dark .pf-header > div:last-child > div > div:first-child { background: #202c33; color: #00a884; }
+         .pf-page.is-dark .pf-header > div:last-child > div > div:first-child { background: #17253c; color: #00a884; }
          .pf-page.is-dark .pf-theme-button,
          .pf-page.is-dark .pf-import-button {
-           border-color: #3b4a54;
-           background: #202c33;
+           border-color: #29364e;
+           background: #17253c;
            color: #d1d7db;
            box-shadow: none;
          }
          .pf-page.is-dark .pf-theme-button:hover,
-         .pf-page.is-dark .pf-import-button:hover { border-color: #00a884; background: #26353d; color: #00d9a9; }
-         .pf-page.is-dark .pf-tabs { border-color: #2a3942; background: #111b21; }
+         .pf-page.is-dark .pf-import-button:hover { border-color: #00a884; background: #1b2e49; color: #00d9a9; }
+         .pf-page.is-dark .pf-tabs { border-color: #29364e; background: #121c2e; }
          .pf-page.is-dark .pf-tab { color: #8696a0; }
-         .pf-page.is-dark .pf-tab:hover { background: #202c33; color: #e9edef; }
+         .pf-page.is-dark .pf-tab:hover { background: #17253c; color: #e9edef; }
          .pf-page.is-dark .pf-tab.is-active { background: #00a884; color: #fff; }
-         .pf-page.is-dark .pf-toolbar { border-color: #2a3942; background: #202c33; }
+         .pf-page.is-dark .pf-toolbar { border-color: #29364e; background: #17253c; }
          .pf-page.is-dark .pf-search-input {
-           border-color: #2a3942;
-           background: #2a3942;
+           border-color: #29364e;
+           background: #29364e;
            color: #e9edef;
          }
          .pf-page.is-dark .pf-search-input::placeholder { color: #8696a0; }
          .pf-page.is-dark .pf-commercial-stage-filter {
            border-color: #00a884;
-           background: #2a3942;
+           background: #29364e;
          }
          .pf-page.is-dark .pf-commercial-stage-filter > span { color: #53e3bd; }
          .pf-page.is-dark .pf-commercial-stage-filter select { color: #e9edef; }
-         .pf-page.is-dark .pf-commercial-stage-filter option { background: #202c33; color: #e9edef; }
-         .pf-page.is-dark .pf-refresh-button { border-color: #3b4a54; background: #2a3942; }
-         .pf-page.is-dark .pf-prospect-item { border-bottom-color: #202c33; color: #d1d7db; }
-         .pf-page.is-dark .pf-prospect-item:hover { background: #202c33; }
-         .pf-page.is-dark .pf-prospect-item.is-active { background: #2a3942; box-shadow: inset 3px 0 #00a884; }
-         .pf-page.is-dark .pf-prospect-mode-shortcut { border-color: #3b4a54; background: #202c33; color: #aebac1; }
+         .pf-page.is-dark .pf-commercial-stage-filter option { background: #17253c; color: #e9edef; }
+         .pf-page.is-dark .pf-refresh-button { border-color: #29364e; background: #29364e; }
+         .pf-page.is-dark .pf-prospect-item { border-bottom-color: #17253c; color: #d1d7db; }
+         .pf-page.is-dark .pf-prospect-item:hover { background: #17253c; }
+         .pf-page.is-dark .pf-prospect-item.is-active { background: #29364e; box-shadow: inset 3px 0 #00a884; }
+         .pf-page.is-dark .pf-prospect-mode-shortcut { border-color: #29364e; background: #17253c; color: #aebac1; }
          .pf-page.is-dark .pf-prospect-mode-shortcut:hover { border-color: #00a884; color: #53d6ba; }
          .pf-page.is-dark .pf-prospect-name-row strong { color: #e9edef; }
          .pf-page.is-dark .pf-prospect-company,
          .pf-page.is-dark .pf-prospect-last-message { color: #8696a0; }
-         .pf-page.is-dark .pf-prospect-name-row small { background: #2a3942; color: #8696a0; }
+         .pf-page.is-dark .pf-prospect-name-row small { background: #29364e; color: #8696a0; }
          .pf-page.is-dark .pf-prospect-item.is-active .pf-prospect-name-row small { background: #00a884; color: #fff; }
          .pf-page.is-dark .pf-lead-info {
-           border-color: #2a3942;
-           background: rgba(32,44,51,.96);
+           border-color: #29364e;
+           background: rgba(18,28,46,.96);
            box-shadow: 0 1px 2px rgba(0,0,0,.22);
          }
          .pf-page.is-dark .pf-lead-info > div:first-child > button { color: #e9edef; }
-         .pf-page.is-dark .pf-lead-info > div:first-child > span { background: #2a3942; color: #d1d7db; }
+         .pf-page.is-dark .pf-lead-info > div:first-child > span { background: #29364e; color: #d1d7db; }
          .pf-page.is-dark .pf-lead-info > div:nth-child(2),
          .pf-page.is-dark .pf-lead-info > div:nth-child(3) { color: #8696a0; }
-         .pf-page.is-dark .pf-lead-info > div:nth-child(3) { border-top-color: #2a3942; }
-         .pf-page.is-dark .pf-lead-info > div:nth-child(3) span { background: #2a3942; color: #d1d7db; }
-         .pf-page.is-dark .pf-conversation-title { background: #182229; color: #8696a0; }
+         .pf-page.is-dark .pf-lead-info > div:nth-child(3) { border-top-color: #29364e; }
+         .pf-page.is-dark .pf-lead-info > div:nth-child(3) span { background: #29364e; color: #d1d7db; }
+         .pf-page.is-dark .pf-conversation-title { background: #0d1626; color: #8696a0; }
          .pf-page.is-dark .pf-conversation-subtitle { color: #667781; }
          .pf-page.is-dark .pf-last-message { color: #e9edef; }
-         .pf-page.is-dark .pf-view-switcher { border-color: #2a3942; background: #111b21; }
+         .pf-page.is-dark .pf-view-switcher { border-color: #29364e; background: #121c2e; }
          .pf-page.is-dark .pf-view-switcher button { color: #8696a0; }
-         .pf-page.is-dark .pf-view-switcher button:hover { background: #202c33; color: #e9edef; }
+         .pf-page.is-dark .pf-view-switcher button:hover { background: #17253c; color: #e9edef; }
          .pf-page.is-dark .pf-view-switcher button.is-active { background: #00a884; color: #fff; }
-         .pf-page.is-dark .pf-conversation-pane { border-color: #2a3942; background: #0b141a; }
-         .pf-page.is-dark .pf-conversation-header { border-bottom-color: #2a3942; background: #111b21; }
+         .pf-page.is-dark .pf-conversation-pane { border-color: #29364e; background: #0b1120; }
+         .pf-page.is-dark .pf-conversation-header { border-bottom-color: #29364e; background: #121c2e; }
          .pf-page.is-dark .pf-conversation-header h2 { color: #e9edef; }
          .pf-page.is-dark .pf-conversation-header p { color: #8696a0; }
-         .pf-page.is-dark .pf-conversation-composer { border-top-color: #2a3942; background: #202c33; }
-         .pf-page.is-dark .pf-conversation-compose-row textarea { border-color: #3b4a54; background: #111b21; color: #e9edef; }
+         .pf-page.is-dark .pf-conversation-composer { border-top-color: #29364e; background: #17253c; }
+         .pf-page.is-dark .pf-conversation-compose-row textarea { border-color: #29364e; background: #121c2e; color: #e9edef; }
          .pf-page.is-dark .pf-conversation-compose-row textarea::placeholder { color: #667781; }
          .pf-page.is-dark .pf-conversation-warning { border-color: #8a6d1d; background: #332b12; color: #f5d77a; }
          .pf-page.is-dark .pf-conversation-warning.is-blocked { border-color: #7f1d1d; background: #351515; color: #fca5a5; }
-         .pf-page.is-dark .pf-selected-pane .pf-lead-actions { border-top-color: #2a3942; background: rgba(32,44,51,.97); }
-         .pf-page.is-dark .pf-lead-actions button { border-color: #3b4a54; background: #202c33; color: #d1d7db; }
+         .pf-page.is-dark .pf-selected-pane .pf-lead-actions { border-top-color: #29364e; background: rgba(23,37,60,.97); }
+         .pf-page.is-dark .pf-lead-actions button { border-color: #29364e; background: #17253c; color: #d1d7db; }
          .pf-page.is-dark .pf-lead-actions > button:first-child,
          .pf-page.is-dark .pf-lead-actions .pf-action-reply { border-color: #00a884; background: #00a884; color: #fff; }
          .pf-page.is-dark .pf-action-call-chain { border-color: #2563eb !important; background: #172554 !important; color: #93c5fd !important; }
@@ -6176,63 +6176,63 @@ function abrirContatoDaAgenda(tarefa) {
          .pf-page.is-dark .pf-next-task { border-color: #176b5c; background: #132f2b; }
          .pf-page.is-dark .pf-next-task strong { color: #e9edef; }
          .pf-page.is-dark .pf-next-task small { color: #8696a0; }
-         .pf-page.is-dark .pf-next-task button { border-color: #3b4a54; background: #202c33; color: #53d6ba; }
-         .pf-page.is-dark .pf-agenda-page { border-color: #2a3942; background: #0b141a; }
-         .pf-page.is-dark .pf-agenda-header { border-bottom-color: #2a3942; background: #111b21; }
+         .pf-page.is-dark .pf-next-task button { border-color: #29364e; background: #17253c; color: #53d6ba; }
+         .pf-page.is-dark .pf-agenda-page { border-color: #29364e; background: #0b1120; }
+         .pf-page.is-dark .pf-agenda-header { border-bottom-color: #29364e; background: #121c2e; }
          .pf-page.is-dark .pf-agenda-header h2 { color: #e9edef; }
          .pf-page.is-dark .pf-agenda-header p { color: #8696a0; }
-         .pf-page.is-dark .pf-agenda-header > button { border-color: #3b4a54; background: #202c33; color: #d1d7db; }
-         .pf-page.is-dark .pf-agenda-toolbar { border-bottom-color: #2a3942; background: #202c33; }
-         .pf-page.is-dark .pf-agenda-filters button { background: #2a3942; color: #d1d7db; }
+         .pf-page.is-dark .pf-agenda-header > button { border-color: #29364e; background: #17253c; color: #d1d7db; }
+         .pf-page.is-dark .pf-agenda-toolbar { border-bottom-color: #29364e; background: #17253c; }
+         .pf-page.is-dark .pf-agenda-filters button { background: #29364e; color: #d1d7db; }
          .pf-page.is-dark .pf-agenda-filters button.is-active { background: #00a884; color: #fff; }
-         .pf-page.is-dark .pf-agenda-toolbar > input { border-color: #3b4a54; background: #2a3942; color: #e9edef; }
-         .pf-page.is-dark .pf-task-card { border-color: #2a3942; border-left-color: #00a884; background: #111b21; }
+         .pf-page.is-dark .pf-agenda-toolbar > input { border-color: #29364e; background: #29364e; color: #e9edef; }
+         .pf-page.is-dark .pf-task-card { border-color: #29364e; border-left-color: #00a884; background: #121c2e; }
          .pf-page.is-dark .pf-task-card.is-overdue { border-left-color: #ef4444; }
          .pf-page.is-dark .pf-task-title-row strong { color: #e9edef; }
-         .pf-page.is-dark .pf-task-title-row span { background: #2a3942; color: #aebac1; }
+         .pf-page.is-dark .pf-task-title-row span { background: #29364e; color: #aebac1; }
          .pf-page.is-dark .pf-task-content p { color: #aebac1; }
-         .pf-page.is-dark .pf-task-actions button { border-color: #3b4a54; background: #202c33; color: #d1d7db; }
+         .pf-page.is-dark .pf-task-actions button { border-color: #29364e; background: #17253c; color: #d1d7db; }
          .pf-page.is-dark .pf-task-actions button.is-complete { border-color: #00a884; background: #00a884; color: #fff; }
          .pf-page.is-dark .pf-task-form label > span { color: #d1d7db; }
          .pf-page.is-dark .pf-task-form input,
          .pf-page.is-dark .pf-task-form select,
-         .pf-page.is-dark .pf-task-form textarea { border-color: #3b4a54; background: #202c33; color: #e9edef; color-scheme: dark; }
-         .pf-page.is-dark .pf-calls-page { border-color: #2a3942; background: #0b141a; }
-         .pf-page.is-dark .pf-calls-header { border-bottom-color: #2a3942; background: #111b21; }
+         .pf-page.is-dark .pf-task-form textarea { border-color: #29364e; background: #17253c; color: #e9edef; color-scheme: dark; }
+         .pf-page.is-dark .pf-calls-page { border-color: #29364e; background: #0b1120; }
+         .pf-page.is-dark .pf-calls-header { border-bottom-color: #29364e; background: #121c2e; }
          .pf-page.is-dark .pf-calls-header h2 { color: #e9edef; }
          .pf-page.is-dark .pf-calls-header p { color: #8696a0; }
-         .pf-page.is-dark .pf-calls-header-actions button { border-color: #3b4a54; background: #202c33; color: #d1d7db; }
+         .pf-page.is-dark .pf-calls-header-actions button { border-color: #29364e; background: #17253c; color: #d1d7db; }
          .pf-page.is-dark .pf-calls-header-actions button.is-primary { border-color: #2563eb; background: #2563eb; color: #fff; }
-         .pf-page.is-dark .pf-calls-toolbar { border-bottom-color: #2a3942; background: #202c33; }
-         .pf-page.is-dark .pf-calls-tabs button { background: #2a3942; color: #d1d7db; }
+         .pf-page.is-dark .pf-calls-toolbar { border-bottom-color: #29364e; background: #17253c; }
+         .pf-page.is-dark .pf-calls-tabs button { background: #29364e; color: #d1d7db; }
          .pf-page.is-dark .pf-calls-tabs button.is-active { background: #2563eb; color: #fff; }
-         .pf-page.is-dark .pf-calls-summary span { background: #2a3942; color: #aebac1; }
+         .pf-page.is-dark .pf-calls-summary span { background: #29364e; color: #aebac1; }
          .pf-page.is-dark .pf-calls-summary strong { color: #e9edef; }
-         .pf-page.is-dark .pf-calls-table { border-color: #2a3942; }
-         .pf-page.is-dark .pf-calls-table td { border-top-color: #2a3942; background: #111b21; color: #d1d7db; }
-         .pf-page.is-dark .pf-calls-table tbody tr:nth-child(even) td { background: #182229; }
+         .pf-page.is-dark .pf-calls-table { border-color: #29364e; }
+         .pf-page.is-dark .pf-calls-table td { border-top-color: #29364e; background: #121c2e; color: #d1d7db; }
+         .pf-page.is-dark .pf-calls-table tbody tr:nth-child(even) td { background: #0d1626; }
          .pf-page.is-dark .pf-calls-table td:first-child strong { color: #e9edef; }
-         .pf-page.is-dark .pf-call-readonly div { border-color: #3b4a54; background: #202c33; }
+         .pf-page.is-dark .pf-call-readonly div { border-color: #29364e; background: #17253c; }
          .pf-page.is-dark .pf-call-readonly p { color: #e9edef; }
          .pf-page.is-dark .pf-call-scheduled-info { background: #182b43; color: #bfdbfe; }
          .pf-page.is-dark .pf-messages-page,
          .pf-page.is-dark .pf-cadence-card,
-         .pf-page.is-dark .pf-empty-state { border-color: #2a3942; background: #111b21; color: #e9edef; }
-         .pf-page.is-dark .pf-section-header { border-bottom-color: #2a3942; }
+         .pf-page.is-dark .pf-empty-state { border-color: #29364e; background: #121c2e; color: #e9edef; }
+         .pf-page.is-dark .pf-section-header { border-bottom-color: #29364e; }
          .pf-page.is-dark .pf-section-header p,
          .pf-page.is-dark .pf-cadence-card p { color: #8696a0; }
-         .pf-page.is-dark .pf-cadence-card:hover { border-color: #00a884; background: #202c33; }
-         .pf-page.is-dark .pf-modal { border-color: #3b4a54; background: #111b21; color: #e9edef; }
+         .pf-page.is-dark .pf-cadence-card:hover { border-color: #00a884; background: #17253c; }
+         .pf-page.is-dark .pf-modal { border-color: #29364e; background: #121c2e; color: #e9edef; }
          .pf-page.is-dark .pf-modal-titlebar,
-         .pf-page.is-dark .pf-modal-footer { border-color: #2a3942; background: #202c33; }
+         .pf-page.is-dark .pf-modal-footer { border-color: #29364e; background: #17253c; }
          .pf-page.is-dark .pf-modal-body label { color: #d1d7db; }
          .pf-page.is-dark .pf-modal-body textarea,
-         .pf-page.is-dark .campo { border-color: #3b4a54; background: #202c33; color: #e9edef; }
-         .pf-page.is-dark .pf-history-list { background-color: #0b141a; }
+         .pf-page.is-dark .campo { border-color: #29364e; background: #17253c; color: #e9edef; }
+         .pf-page.is-dark .pf-history-list { background-color: #0b1120; }
          .pf-page.is-dark .pf-chat-bubble p { color: #e9edef; }
-         .pf-page.is-dark .pf-chat-row.is-system .pf-chat-bubble { background: #182229; color: #8696a0; }
-         .pf-page.is-dark .pf-sidebar-resizer { border-color: #3b4a54; background: #202c33; }
-         .pf-page.is-dark .pf-sidebar-resizer button { border-color: #3b4a54; background: #111b21; color: #aebac1; }
+         .pf-page.is-dark .pf-chat-row.is-system .pf-chat-bubble { background: #0d1626; color: #8696a0; }
+         .pf-page.is-dark .pf-sidebar-resizer { border-color: #29364e; background: #17253c; }
+         .pf-page.is-dark .pf-sidebar-resizer button { border-color: #29364e; background: #121c2e; color: #aebac1; }
          .pf-page.is-dark .pf-sidebar-resizer button:hover { border-color: #00a884; color: #00cfa5; }
 
          @media (max-width: 1100px) {
@@ -6431,9 +6431,9 @@ function abrirContatoDaAgenda(tarefa) {
 }
 .pf-page a.pf-whatsapp-web-button:hover { background: #dcf5e9; }
 .pf-page.is-dark a.pf-whatsapp-web-button {
-  background: #202c33; color: #90d6bc; border-color: #3b5b50;
+  background: #17253c; color: #90d6bc; border-color: #3b5b50;
 }
-.pf-page.is-dark a.pf-whatsapp-web-button:hover { background: #2a3942; }
+.pf-page.is-dark a.pf-whatsapp-web-button:hover { background: #29364e; }
 
 /* Segunda linha de filtros */
 .pf-page .pf-search-row {
@@ -6545,15 +6545,15 @@ function abrirContatoDaAgenda(tarefa) {
 /* ---------- Estado vazio ---------- */
 
 .pf-page.is-dark .pf-empty-state > div:first-child {
-  background: linear-gradient(135deg, #111b21, #182229) !important;
+  background: linear-gradient(135deg, #121c2e, #0d1626) !important;
 }
 
 .pf-page.is-dark
   .pf-empty-state
   > div:first-child
   > div:first-child {
-  border-color: #3b4a54 !important;
-  background: #202c33 !important;
+  border-color: #29364e !important;
+  background: #17253c !important;
   color: #53bdeb !important;
 }
 
@@ -6576,14 +6576,14 @@ function abrirContatoDaAgenda(tarefa) {
 .pf-page.is-dark
   .pf-empty-state
   > div:nth-child(2):not(:last-child) {
-  background: #2a3942 !important;
+  background: #29364e !important;
 }
 
 .pf-page.is-dark
   .pf-empty-state
   > div:nth-child(2):not(:last-child)
   > div {
-  background: #182229 !important;
+  background: #0d1626 !important;
 }
 
 .pf-page.is-dark
@@ -6614,7 +6614,7 @@ function abrirContatoDaAgenda(tarefa) {
 }
 
 .pf-page.is-dark .pf-modal-titlebar button {
-  background: #2a3942 !important;
+  background: #29364e !important;
   color: #e9edef !important;
 }
 
@@ -6631,8 +6631,8 @@ function abrirContatoDaAgenda(tarefa) {
 .pf-page.is-dark .pf-modal-body textarea,
 .pf-page.is-dark .pf-modal-body input,
 .pf-page.is-dark .pf-modal-body select {
-  border-color: #3b4a54 !important;
-  background: #202c33 !important;
+  border-color: #29364e !important;
+  background: #17253c !important;
   color: #e9edef !important;
   color-scheme: dark;
 }
@@ -6648,8 +6648,8 @@ function abrirContatoDaAgenda(tarefa) {
 .pf-page.is-dark
   .pf-modal-body
   > div[class*="rounded"] {
-  border-color: #3b4a54 !important;
-  background: #182229 !important;
+  border-color: #29364e !important;
+  background: #0d1626 !important;
   color: #d1d7db !important;
 }
 
@@ -6693,13 +6693,13 @@ function abrirContatoDaAgenda(tarefa) {
 /* Rodapé dos modais */
 
 .pf-page.is-dark .pf-modal-footer {
-  border-color: #2a3942 !important;
-  background: #202c33 !important;
+  border-color: #29364e !important;
+  background: #17253c !important;
 }
 
 .pf-page.is-dark .pf-modal-footer button:first-child {
-  border-color: #3b4a54 !important;
-  background: #2a3942 !important;
+  border-color: #29364e !important;
+  background: #29364e !important;
   color: #e9edef !important;
 }
 
@@ -6726,8 +6726,8 @@ function abrirContatoDaAgenda(tarefa) {
 /* ---------- Modal de importação ---------- */
 
 .pf-page.is-dark .pf-import-type button {
-  border-color: #3b4a54 !important;
-  background: #202c33 !important;
+  border-color: #29364e !important;
+  background: #17253c !important;
   color: #d1d7db !important;
 }
 
@@ -6746,7 +6746,7 @@ function abrirContatoDaAgenda(tarefa) {
 
 .pf-page.is-dark .pf-file-picker {
   border-color: #3b82f6 !important;
-  background: #182229 !important;
+  background: #0d1626 !important;
   color: #e9edef !important;
 }
 
@@ -6759,8 +6759,8 @@ function abrirContatoDaAgenda(tarefa) {
 }
 
 .pf-page.is-dark .pf-import-rules {
-  border-color: #3b4a54 !important;
-  background: #182229 !important;
+  border-color: #29364e !important;
+  background: #0d1626 !important;
 }
 
 .pf-page.is-dark .pf-import-rules strong {
@@ -6774,7 +6774,7 @@ function abrirContatoDaAgenda(tarefa) {
 /* ---------- Análise de atividade ---------- */
 
 .pf-page.is-dark .pf-analysis-body {
-  background: #111b21;
+  background: #121c2e;
 }
 
 .pf-page.is-dark .pf-analysis-period span,
@@ -6799,17 +6799,17 @@ function abrirContatoDaAgenda(tarefa) {
 .pf-page.is-dark .pf-procrastination-details > div,
 .pf-page.is-dark .pf-analysis-breakdowns > section,
 .pf-page.is-dark .pf-analysis-daily {
-  border-color: #3b4a54;
-  background: #202c33;
+  border-color: #29364e;
+  background: #17253c;
 }
 
 .pf-page.is-dark .pf-analysis-section-title,
 .pf-page.is-dark .pf-analysis-table-wrap td {
-  border-color: #2a3942;
+  border-color: #29364e;
 }
 
 .pf-page.is-dark .pf-analysis-table-wrap th {
-  background: #182229;
+  background: #0d1626;
   color: #aebac1;
 }
 
@@ -6818,7 +6818,7 @@ function abrirContatoDaAgenda(tarefa) {
 }
 
 .pf-page.is-dark .pf-analysis-table-wrap tbody tr:nth-child(even) {
-  background: #182229;
+  background: #0d1626;
 }
 
 .pf-page.is-dark .pf-analysis-chip-list > div {
@@ -6915,7 +6915,33 @@ function abrirContatoDaAgenda(tarefa) {
   }
 }
 
-       `}</style>
+       
+/* Fundos do tema escuro alinhados à paleta da tela de login. */
+.pf-page.is-dark {
+  --wa-app: #17253c;
+  --wa-panel: #121c2e;
+  --wa-chat: #0b1120;
+  --wa-border: #29364e;
+  --wa-incoming: #17253c;
+}
+.pf-page.is-dark .pf-history-titlebar,
+.pf-page.is-dark .pf-contact-day-filter,
+.pf-page.is-dark .pf-contact-day-filter option {
+  background: #17253c;
+}
+.pf-page.is-dark .pf-search-input,
+.pf-page.is-dark .pf-task-form input,
+.pf-page.is-dark .pf-task-form select,
+.pf-page.is-dark .pf-task-form textarea,
+.pf-page.is-dark .pf-activities-tools input,
+.pf-page.is-dark .pf-activities-compose textarea,
+.pf-page.is-dark .campo,
+.pf-page.is-dark .pf-modal-body textarea,
+.pf-page.is-dark .pf-modal-body input,
+.pf-page.is-dark .pf-modal-body select {
+  background: #0d1626 !important;
+}
+`}</style>
      </div>
    );
  }
