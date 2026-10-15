@@ -250,7 +250,7 @@ function classeProcrastinacao(nivel) {
     ],
     CONVERTIDO: [
       "Convertido",
-      "bg-emerald-100 text-emerald-700",
+      "bg-blue-100 text-blue-700",
     ],
     ENCERRADO: [
       "Encerrado",
@@ -325,9 +325,9 @@ function statusEntregaVisual(interacao) {
      WHATSAPP: {
        nome: "WhatsApp",
        icone: "◉",
-       classe: "bg-emerald-50 text-emerald-700 ring-emerald-200",
-       borda: "border-t-emerald-500",
-       faixa: "from-emerald-500 to-teal-500",
+       classe: "bg-blue-50 text-blue-700 ring-blue-200",
+       borda: "border-t-blue-500",
+       faixa: "from-blue-500 to-blue-500",
      },
      INSTAGRAM: {
        nome: "Instagram",
@@ -3067,7 +3067,7 @@ function abrirContatoDaAgenda(tarefa) {
                                <button
                                  type="button"
                                  onClick={() => abrirModalConversao(lead)}
-                                 className="rounded-xl border border-emerald-200 bg-white px-3 py-2.5 text-xs font-black text-emerald-700 hover:bg-emerald-50"
+                                 className="rounded-xl border border-blue-200 bg-white px-3 py-2.5 text-xs font-black text-blue-700 hover:bg-blue-50"
                                >
                                  ★ Virou cliente
                                </button>
@@ -3438,7 +3438,7 @@ function abrirContatoDaAgenda(tarefa) {
                        <span
                          className={`rounded-full px-2 py-1 text-[10px] font-black ${
                            mensagem.ativo
-                             ? "bg-emerald-100 text-emerald-700"
+                             ? "bg-blue-100 text-blue-700"
                              : "bg-slate-100 text-slate-500"
                          }`}
                        >
@@ -4323,7 +4323,7 @@ function abrirContatoDaAgenda(tarefa) {
                    modalAcao.tipo === "BLOQUEIO"
                      ? "bg-red-600 shadow-red-200"
                      : modalAcao.tipo === "CONVERSAO"
-                       ? "bg-emerald-600 shadow-emerald-200"
+                       ? "bg-blue-600 shadow-blue-200"
                        : modalAcao.tipo === "ENCERRAMENTO"
                          ? "bg-orange-600 shadow-orange-200"
                          : modalAcao.tipo === "MINHA_RESPOSTA"
@@ -5312,37 +5312,37 @@ function abrirContatoDaAgenda(tarefa) {
 }
 
 .pf-filter-button.is-active .pf-filter-count {
-   border-color: #34d399;
-    background: #25d366;
+   border-color: #60a5fa;
+    background: #3b82f6;
   color: #1d4ed8;
 }
 
 /* Botão Não lidos: verde semelhante ao WhatsApp */
 .pf-filter-button.is-unread {
-  border-color: #34d399;
-  background: #25d366;
+  border-color: #60a5fa;
+  background: #3b82f6;
   color: #ffffff;
 }
 
 .pf-filter-button.is-unread:hover {
-  background: #20bd5a;
+  background: #2563eb;
 }
 
 .pf-filter-button.is-unread .pf-filter-count {
   background: #ffffff;
-  color: #15803d;
+  color: #1d4ed8;
 }
 
 .pf-filter-button.is-unread.is-active {
-  border-color: #bbf7d0;
-  background: #16a34a;
+  border-color: #bfdbfe;
+  background: #2563eb;
   color: #ffffff;
-  box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.18);
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.18);
 }
 
 .pf-filter-button.is-unread.is-active .pf-filter-count {
   background: #ffffff;
-  color: #15803d;
+  color: #1d4ed8;
 }
          .pf-search-row { display: flex; width: 100%; flex-wrap: wrap; justify-self: start; align-items: center; gap: 8px; }
          .pf-search-row > div { position: relative; flex: 1 1 220px; }
@@ -5357,7 +5357,7 @@ function abrirContatoDaAgenda(tarefa) {
            height: 36px;
            min-width: 168px;
            align-items: center;
-           border: 1px solid #65d9bd;
+           border: 1px solid #93c5fd;
            border-radius: 7px;
            background: #ffffff;
            overflow: hidden;
@@ -5368,7 +5368,7 @@ function abrirContatoDaAgenda(tarefa) {
            top: 4px;
            left: 10px;
            z-index: 1;
-           color: #008f72;
+           color: #2563eb;
            font-size: 7px;
            font-weight: 900;
            line-height: 1;
@@ -5382,15 +5382,15 @@ function abrirContatoDaAgenda(tarefa) {
            border: 0;
            padding: 11px 28px 1px 9px;
            background: transparent;
-           color: #0f513f;
+           color: #1e3a8a;
            font-size: 10px;
            font-weight: 900;
            outline: none;
            cursor: pointer;
          }
          .pf-commercial-stage-filter:focus-within {
-           border-color: #00a884;
-           box-shadow: 0 0 0 3px rgba(0,168,132,.16);
+           border-color: #3b82f6;
+           box-shadow: 0 0 0 3px rgba(59, 130, 246,.16);
          }
  
          .pf-loading { border: 1px solid #dbe2ea; border-radius: 10px; padding: 55px 20px; background: #fff; color: #64748b; text-align: center; font-size: 13px; font-weight: 700; }
@@ -5445,8 +5445,8 @@ function abrirContatoDaAgenda(tarefa) {
         }
 
           .pf-sidebar-resizer button:hover {
-            background: rgba(0, 168, 132, 0.12);
-            color: #00a884;
+            background: rgba(59, 130, 246, 0.12);
+            color: #3b82f6;
           }
 
           .pf-sidebar-resizer .pf-sidebar-drag-handle {
@@ -5476,7 +5476,7 @@ function abrirContatoDaAgenda(tarefa) {
          .pf-prospect-item.is-active { background: #e8f1ff; box-shadow: inset 3px 0 #2563eb; }
          .pf-prospect-select { display: grid; min-width: 0; flex: 1; grid-template-columns: 36px minmax(0,1fr); gap: 9px; align-items: center; border: 0; padding: 5px 4px; background: transparent; color: inherit; text-align: left; }
          .pf-prospect-mode-shortcut { flex: 0 0 auto; border: 1px solid #cbd5e1; border-radius: 6px; padding: 5px 6px; background: #fff; color: #475569; font-size: 8px; font-weight: 900; white-space: nowrap; }
-         .pf-prospect-mode-shortcut:hover { border-color: #00a884; color: #00856a; }
+         .pf-prospect-mode-shortcut:hover { border-color: #3b82f6; color: #2563eb; }
          .pf-prospect-avatar { display: inline-flex; width: 36px; height: 36px; align-items: center; justify-content: center; border-radius: 50%; background: #153b67; color: #fff; font-size: 9px; font-weight: 900; }
          .pf-prospect-item.is-active .pf-prospect-avatar { background: #2563eb; }
          .pf-prospect-copy { display: block; min-width: 0; }
@@ -5500,7 +5500,7 @@ function abrirContatoDaAgenda(tarefa) {
          .pf-lead-list { display: grid; grid-template-columns: 1fr; gap: 7px; }
          .pf-lead-card { overflow: hidden; border: 1px solid #dbe2ea; border-left: 4px solid #3b82f6; border-radius: 9px; background: #fff; box-shadow: 0 1px 4px rgba(15,23,42,.04); transition: border-color .16s ease, box-shadow .16s ease; }
          .pf-lead-card:hover { border-color: #bfdbfe; box-shadow: 0 4px 12px rgba(15,23,42,.07); }
-         .pf-lead-card[data-canal="WHATSAPP"] { border-left-color: #16a34a; }
+         .pf-lead-card[data-canal="WHATSAPP"] { border-left-color: #2563eb; }
          .pf-lead-card[data-canal="INSTAGRAM"] { border-left-color: #db2777; }
          .pf-lead-card[data-canal="EMAIL"] { border-left-color: #2563eb; }
          .pf-lead-card[data-canal="TELEFONE"] { border-left-color: #7c3aed; }
@@ -5537,17 +5537,17 @@ function abrirContatoDaAgenda(tarefa) {
          .pf-lead-actions .pf-action-reply { border-color: #7c3aed; background: #7c3aed; color: #fff; }
          .pf-lead-actions .pf-action-close { color: #b45309; }
  
-         .pf-tab-count { display: inline-flex; min-width: 18px; height: 18px; align-items: center; justify-content: center; border-radius: 999px; background: #00a884; color: #fff; font-size: 9px; }
+         .pf-tab-count { display: inline-flex; min-width: 18px; height: 18px; align-items: center; justify-content: center; border-radius: 999px; background: #3b82f6; color: #fff; font-size: 9px; }
          .pf-action-call-chain { border-color: #2563eb !important; background: #eff6ff !important; color: #1d4ed8 !important; }
          .pf-action-call-chain:disabled { cursor: wait; opacity: .65; }
-         .pf-action-schedule { border-color: #8adaca !important; background: #e9fbf6 !important; color: #00856a !important; }
-         .pf-next-task { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 10px; padding: 9px 10px; border: 1px solid #9ce1d3; border-radius: 9px; background: #effcf8; }
+         .pf-action-schedule { border-color: #93c5fd !important; background: #eff6ff !important; color: #2563eb !important; }
+         .pf-next-task { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 10px; padding: 9px 10px; border: 1px solid #bfdbfe; border-radius: 9px; background: #eff6ff; }
          .pf-next-task > div:first-child { display: grid; gap: 2px; min-width: 0; }
-         .pf-next-task span { color: #00856a; font-size: 8px; font-weight: 900; text-transform: uppercase; letter-spacing: .08em; }
-         .pf-next-task strong { color: #075e54; font-size: 10px; }
+         .pf-next-task span { color: #2563eb; font-size: 8px; font-weight: 900; text-transform: uppercase; letter-spacing: .08em; }
+         .pf-next-task strong { color: #1e40af; font-size: 10px; }
          .pf-next-task small { color: #667781; font-size: 9px; }
          .pf-next-task > div:last-child { display: flex; gap: 5px; }
-         .pf-next-task button { border: 1px solid #b7dcd4; border-radius: 6px; padding: 5px 7px; background: #fff; color: #087d69; font-size: 9px; font-weight: 900; white-space: nowrap; }
+         .pf-next-task button { border: 1px solid #bfdbfe; border-radius: 6px; padding: 5px 7px; background: #fff; color: #1d4ed8; font-size: 9px; font-weight: 900; white-space: nowrap; }
 
          .pf-conversation-pane { display: flex; min-height: 490px; overflow: hidden; flex-direction: column; border: 1px solid #dbe2ea; border-radius: 10px; background: #efeae2; box-shadow: 0 1px 4px rgba(15,23,42,.05); }
          .pf-conversation-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 14px; border-bottom: 1px solid #dbe2ea; background: #fff; }
@@ -5560,9 +5560,9 @@ function abrirContatoDaAgenda(tarefa) {
          .pf-conversation-warning.is-blocked { border-color: #fecaca; background: #fef2f2; color: #b91c1c; }
          .pf-conversation-compose-row { display: flex; align-items: flex-end; gap: 8px; }
          .pf-conversation-compose-row textarea { field-sizing: content; width: 100%; min-height: 44px; max-height: 112px; resize: none; overflow-y: auto; border: 1px solid #dbe2ea; border-radius: 24px; padding: 11px 17px; background: #fff; color: #0f172a; font-size: 12px; line-height: 20px; outline: none; box-shadow: 0 1px 2px rgba(15,23,42,.06); }
-         .pf-conversation-compose-row textarea:focus { border-color: #9adfd1; box-shadow: 0 0 0 2px rgba(0,168,132,.11); }
-         .pf-conversation-compose-row .pf-conversation-send { display: inline-flex; width: 44px; min-width: 44px; height: 44px; align-items: center; justify-content: center; flex: 0 0 44px; border: 0; border-radius: 999px; padding: 0; background: #00a884; color: #fff; box-shadow: 0 2px 5px rgba(0,95,76,.2); }
-         .pf-conversation-compose-row .pf-conversation-send:hover { background: #008f72; }
+         .pf-conversation-compose-row textarea:focus { border-color: #93c5fd; box-shadow: 0 0 0 2px rgba(59, 130, 246,.11); }
+         .pf-conversation-compose-row .pf-conversation-send { display: inline-flex; width: 44px; min-width: 44px; height: 44px; align-items: center; justify-content: center; flex: 0 0 44px; border: 0; border-radius: 999px; padding: 0; background: #3b82f6; color: #fff; box-shadow: 0 2px 5px rgba(59, 130, 246,.2); }
+         .pf-conversation-compose-row .pf-conversation-send:hover { background: #2563eb; }
          .pf-conversation-compose-row .pf-conversation-send:disabled { cursor: not-allowed; background: #aebac1; box-shadow: none; opacity: .72; }
          .pf-conversation-send svg { width: 21px; height: 21px; fill: currentColor; transform: translateX(1px); }
          .pf-send-loading { font-size: 11px; font-weight: 900; letter-spacing: 1px; }
@@ -5576,14 +5576,14 @@ function abrirContatoDaAgenda(tarefa) {
          .pf-agenda-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 12px; border-bottom: 1px solid #e3e8eb; background: #f0f2f5; }
          .pf-agenda-filters { display: flex; flex-wrap: wrap; gap: 6px; }
          .pf-agenda-filters button { display: inline-flex; align-items: center; gap: 6px; border: 1px solid transparent; border-radius: 7px; padding: 6px 9px; background: #e1e7ea; color: #3b4a54; font-size: 10px; font-weight: 800; }
-         .pf-agenda-filters button.is-active { border-color: #00a884; background: #00a884; color: #fff; }
+         .pf-agenda-filters button.is-active { border-color: #3b82f6; background: #3b82f6; color: #fff; }
          .pf-agenda-filters strong { display: inline-flex; min-width: 17px; height: 17px; align-items: center; justify-content: center; border-radius: 999px; background: rgba(255,255,255,.75); color: #52636d; font-size: 8px; }
-         .pf-agenda-filters button.is-active strong { color: #00856a; }
+         .pf-agenda-filters button.is-active strong { color: #2563eb; }
          .pf-agenda-toolbar > input { width: min(280px, 100%); border: 1px solid #cbd5da; border-radius: 8px; padding: 8px 10px; background: #fff; color: #111b21; font-size: 10px; outline: none; }
          .pf-task-list { display: grid; gap: 8px; padding: 12px; }
-         .pf-task-card { display: grid; grid-template-columns: auto minmax(0,1fr) auto; align-items: center; gap: 12px; border: 1px solid #dbe2ea; border-left: 3px solid #00a884; border-radius: 9px; padding: 11px 12px; background: #fff; box-shadow: 0 1px 2px rgba(11,20,26,.05); }
+         .pf-task-card { display: grid; grid-template-columns: auto minmax(0,1fr) auto; align-items: center; gap: 12px; border: 1px solid #dbe2ea; border-left: 3px solid #3b82f6; border-radius: 9px; padding: 11px 12px; background: #fff; box-shadow: 0 1px 2px rgba(11,20,26,.05); }
          .pf-task-card.is-overdue { border-left-color: #ef4444; }
-         .pf-task-icon { display: flex; width: 34px; height: 34px; align-items: center; justify-content: center; border-radius: 50%; background: #d9fdd3; color: #00856a; font-size: 16px; font-weight: 900; }
+         .pf-task-icon { display: flex; width: 34px; height: 34px; align-items: center; justify-content: center; border-radius: 50%; background: #dbeafe; color: #2563eb; font-size: 16px; font-weight: 900; }
          .pf-task-content { min-width: 0; }
          .pf-task-title-row { display: flex; align-items: center; gap: 8px; }
          .pf-task-title-row strong { overflow: hidden; color: #111b21; font-size: 12px; text-overflow: ellipsis; white-space: nowrap; }
@@ -5622,19 +5622,19 @@ function abrirContatoDaAgenda(tarefa) {
 
 
 
-          .pf-task-actions button.is-complete { border-color: #00a884; background: #00a884; color: #fff; }
-         .pf-task-completed { border-radius: 999px; padding: 5px 9px; background: #d9fdd3; color: #087d69; font-size: 9px; font-weight: 900; }
+          .pf-task-actions button.is-complete { border-color: #3b82f6; background: #3b82f6; color: #fff; }
+         .pf-task-completed { border-radius: 999px; padding: 5px 9px; background: #dbeafe; color: #1d4ed8; font-size: 9px; font-weight: 900; }
          .pf-agenda-empty { display: grid; justify-items: center; gap: 5px; padding: 70px 20px; color: #667781; text-align: center; }
-         .pf-agenda-empty > span { display: flex; width: 45px; height: 45px; align-items: center; justify-content: center; border-radius: 50%; background: #d9fdd3; color: #00856a; font-size: 20px; }
+         .pf-agenda-empty > span { display: flex; width: 45px; height: 45px; align-items: center; justify-content: center; border-radius: 50%; background: #dbeafe; color: #2563eb; font-size: 20px; }
          .pf-agenda-empty strong { color: #3b4a54; font-size: 13px; }
          .pf-agenda-empty p { margin: 0; font-size: 10px; }
-         .pf-task-modal-titlebar { border-bottom-color: #00856a !important; background: #00a884 !important; color: #fff !important; }
+         .pf-task-modal-titlebar { border-bottom-color: #2563eb !important; background: #3b82f6 !important; color: #fff !important; }
          .pf-task-modal-titlebar h2, .pf-task-modal-titlebar p { color: #fff !important; }
          .pf-task-form { display: grid; gap: 13px; }
          .pf-task-form label { display: grid; gap: 5px; }
          .pf-task-form label > span { color: #54656f; font-size: 10px; font-weight: 900; }
          .pf-task-form input, .pf-task-form select, .pf-task-form textarea { width: 100%; border: 1px solid #cbd5da; border-radius: 8px; padding: 9px 10px; background: #fff; color: #111b21; font-size: 11px; outline: none; }
-         .pf-task-form input:focus, .pf-task-form select:focus, .pf-task-form textarea:focus { border-color: #00a884; box-shadow: 0 0 0 3px rgba(0,168,132,.12); }
+         .pf-task-form input:focus, .pf-task-form select:focus, .pf-task-form textarea:focus { border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59, 130, 246,.12); }
 
          .pf-calls-page { overflow: hidden; border: 1px solid #dbe2ea; border-radius: 10px; background: #fff; }
          .pf-calls-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 18px; border-bottom: 1px solid #e3e8eb; }
@@ -5664,7 +5664,7 @@ function abrirContatoDaAgenda(tarefa) {
          .pf-call-cell small { font-size: 8px; font-weight: 800; opacity: .75; }
          .pf-call-cell strong { font-size: 10px; font-weight: 900; }
          .pf-call-cell.is-pending { border-color: #cbd5e1; background: #f1f5f9; color: #475569; }
-         .pf-call-cell.is-success { border-color: #86efac; background: #dcfce7; color: #166534; }
+         .pf-call-cell.is-success { border-color: #93c5fd; background: #dbeafe; color: #1e40af; }
          .pf-call-cell.is-negative { border-color: #fdba74; background: #fff7ed; color: #c2410c; }
          .pf-call-cell.is-return { border-color: #93c5fd; background: #eff6ff; color: #1d4ed8; }
          .pf-call-cell.is-cancelled { border-color: #e2e8f0; background: #f8fafc; color: #94a3b8; }
@@ -5673,7 +5673,7 @@ function abrirContatoDaAgenda(tarefa) {
          .pf-call-scheduled-info { display: flex; align-items: center; justify-content: space-between; gap: 12px; border-radius: 8px; padding: 9px 10px; background: #eff6ff; color: #315b86; font-size: 10px; }
          .pf-call-readonly { display: grid; gap: 12px; }
          .pf-call-result-badge { justify-self: start; border-radius: 999px; padding: 6px 10px; font-size: 10px; font-weight: 900; }
-         .pf-call-result-badge.is-success { background: #dcfce7; color: #166534; }
+         .pf-call-result-badge.is-success { background: #dbeafe; color: #1e40af; }
          .pf-call-result-badge.is-negative { background: #fff7ed; color: #c2410c; }
          .pf-call-result-badge.is-return { background: #eff6ff; color: #1d4ed8; }
          .pf-call-result-badge.is-cancelled { background: #f1f5f9; color: #64748b; }
@@ -5726,7 +5726,7 @@ function abrirContatoDaAgenda(tarefa) {
          .pf-analysis-card > strong.is-date { font-size: 18px; }
          .pf-analysis-card > small { display: block; margin-top: 6px; color: #94a3b8; font-size: 9px; font-weight: 700; }
          .pf-analysis-card.is-blue { border-top-color: #2563eb; } .pf-analysis-card.is-sky { border-top-color: #0ea5e9; }
-         .pf-analysis-card.is-green { border-top-color: #10b981; } .pf-analysis-card.is-navy { border-top-color: #1e3a8a; }
+         .pf-analysis-card.is-green { border-top-color: #3b82f6; } .pf-analysis-card.is-navy { border-top-color: #1e3a8a; }
          .pf-analysis-card.is-cyan { border-top-color: #0891b2; }
          .pf-analysis-card.is-red { border-top-color: #ef4444; }
          .pf-analysis-card.is-amber { border-top-color: #f59e0b; } .pf-analysis-card.is-slate { border-top-color: #64748b; }
@@ -5735,7 +5735,7 @@ function abrirContatoDaAgenda(tarefa) {
          .pf-procrastination-score > span { color: #64748b; font-size: 9px; font-weight: 900; text-transform: uppercase; }
          .pf-procrastination-score > strong { margin-top: 2px; color: #0f172a; font-size: 27px; line-height: 1; font-weight: 900; }
          .pf-procrastination-score > em { width: fit-content; margin-top: 7px; border-radius: 999px; padding: 3px 7px; background: #e2e8f0; color: #475569; font-size: 8px; font-style: normal; font-weight: 900; }
-         .pf-procrastination-score.is-low { border-left-color: #10b981; } .pf-procrastination-score.is-low > em { background: #d1fae5; color: #047857; }
+         .pf-procrastination-score.is-low { border-left-color: #3b82f6; } .pf-procrastination-score.is-low > em { background: #dbeafe; color: #1d4ed8; }
          .pf-procrastination-score.is-moderate { border-left-color: #f59e0b; } .pf-procrastination-score.is-moderate > em { background: #fef3c7; color: #b45309; }
          .pf-procrastination-score.is-high { border-left-color: #f97316; } .pf-procrastination-score.is-high > em { background: #ffedd5; color: #c2410c; }
          .pf-procrastination-score.is-critical { border-left-color: #ef4444; } .pf-procrastination-score.is-critical > em { background: #fee2e2; color: #b91c1c; }
@@ -5769,7 +5769,7 @@ function abrirContatoDaAgenda(tarefa) {
          .pf-modal-header { padding: 18px 20px; color: #fff; }
          .pf-modal-header-blue { background: linear-gradient(135deg,#2563eb,#1e4f87); }
          .pf-modal-header-red { background: linear-gradient(135deg,#b91c1c,#e11d48); }
-         .pf-modal-header-green { background: linear-gradient(135deg,#047857,#0f766e); }
+         .pf-modal-header-green { background: linear-gradient(135deg,#1d4ed8,#2563eb); }
          .pf-modal-header-orange { background: linear-gradient(135deg,#b45309,#ea580c); }
          .pf-modal-header-purple { background: linear-gradient(135deg,#6d28d9,#4338ca); }
          .pf-modal-header > div, .pf-modal-titlebar { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
@@ -5789,7 +5789,7 @@ function abrirContatoDaAgenda(tarefa) {
          .pf-modal-body button[class*="bg-sky"], .pf-modal-footer button:last-child { border-color: #2563eb; background: #2563eb; color: #fff; }
          .pf-modal-footer { display: flex; justify-content: flex-end; gap: 8px; padding: 13px 18px; border-top: 1px solid #e2e8f0; background: #f8fafc; }
          .pf-modal-header-red ~ .pf-modal-footer button:last-child { border-color: #dc2626; background: #dc2626; }
-         .pf-modal-header-green ~ .pf-modal-footer button:last-child { border-color: #059669; background: #059669; }
+         .pf-modal-header-green ~ .pf-modal-footer button:last-child { border-color: #2563eb; background: #2563eb; }
          .pf-modal-header-orange ~ .pf-modal-footer button:last-child { border-color: #ea580c; background: #ea580c; }
          .pf-modal-header-purple ~ .pf-modal-footer button:last-child { border-color: #7c3aed; background: #7c3aed; }
 
@@ -5800,17 +5800,17 @@ function abrirContatoDaAgenda(tarefa) {
          .pf-history-titlebar h2 { color: #fff; font-size: 14px; }
          .pf-history-titlebar p { color: #dbeafe; font-size: 9px; }
          .pf-history-title-actions { display: flex; align-items: center; gap: 9px; }
-         .pf-history-channel { display: inline-flex; align-items: center; gap: 5px; border-radius: 999px; padding: 5px 8px; background: rgba(16,185,129,.18); color: #d1fae5; font-size: 9px; font-weight: 900; }
+         .pf-history-channel { display: inline-flex; align-items: center; gap: 5px; border-radius: 999px; padding: 5px 8px; background: rgba(59, 130, 246,.18); color: #dbeafe; font-size: 9px; font-weight: 900; }
          .pf-history-title-actions button { border: 0; border-radius: 7px; padding: 6px 9px; background: rgba(255,255,255,.12); color: #fff; font-weight: 900; }
          .pf-history-list { display: flex; min-height: 430px; max-height: 72vh; flex-direction: column; gap: 8px; overflow-y: auto; padding: 16px; background: #eaf0f6; }
          .pf-chat-row { display: flex; width: 100%; justify-content: flex-start; }
          .pf-chat-row.is-mine { justify-content: flex-end; }
          .pf-chat-row.is-system { justify-content: center; }
-         .pf-chat-bubble { width: fit-content; max-width: 78%; border: 1px solid #dbe2ea; border-left: 3px solid #10b981; border-radius: 4px 11px 11px 11px; padding: 8px 10px; background: #fff; box-shadow: 0 1px 2px rgba(15,23,42,.05); }
+         .pf-chat-bubble { width: fit-content; max-width: 78%; border: 1px solid #dbe2ea; border-left: 3px solid #3b82f6; border-radius: 4px 11px 11px 11px; padding: 8px 10px; background: #fff; box-shadow: 0 1px 2px rgba(15,23,42,.05); }
          .pf-chat-row.is-mine .pf-chat-bubble { border-color: #bfdbfe; border-right: 3px solid #2563eb; border-left-width: 1px; border-radius: 11px 4px 11px 11px; background: #dbeafe; }
          .pf-chat-row.is-system .pf-chat-bubble { max-width: 88%; border: 0; border-radius: 999px; padding: 5px 10px; background: #dce4ed; color: #64748b; box-shadow: none; }
          .pf-chat-meta { display: flex; align-items: center; justify-content: space-between; gap: 18px; }
-         .pf-chat-meta strong { color: #047857; font-size: 9px; font-weight: 900; }
+         .pf-chat-meta strong { color: #1d4ed8; font-size: 9px; font-weight: 900; }
          .pf-chat-row.is-mine .pf-chat-meta strong { color: #1d4ed8; }
          .pf-chat-row.is-system .pf-chat-meta strong { color: #64748b; }
          .pf-chat-meta span { flex: 0 0 auto; color: #94a3b8; font-size: 8px; font-weight: 700; }
@@ -5862,16 +5862,16 @@ function abrirContatoDaAgenda(tarefa) {
             Aparencia inspirada no WhatsApp Web
             ================================================================ */
          .pf-page {
-           --wa-green: #00a884;
-           --wa-green-strong: #008f72;
-           --wa-green-soft: #d9fdd3;
+           --wa-green: #3b82f6;
+           --wa-green-strong: #2563eb;
+           --wa-green-soft: #dbeafe;
            --wa-app: #f0f2f5;
            --wa-panel: #ffffff;
            --wa-chat: #efeae2;
            --wa-border: #d8dee2;
            --wa-text: #111b21;
            --wa-muted: #667781;
-           --wa-outgoing: #d9fdd3;
+           --wa-outgoing: #dbeafe;
            --wa-incoming: #ffffff;
            transition: background .2s ease, color .2s ease;
          }
@@ -5895,10 +5895,10 @@ function abrirContatoDaAgenda(tarefa) {
 
          .pf-primary-button {
            background: var(--wa-green);
-           box-shadow: 0 5px 14px rgba(0,168,132,.18);
+           box-shadow: 0 5px 14px rgba(59, 130, 246,.18);
          }
          .pf-primary-button:hover { background: var(--wa-green-strong); }
-         .pf-import-button:hover { border-color: var(--wa-green); background: #f1fffb; color: var(--wa-green-strong); }
+         .pf-import-button:hover { border-color: var(--wa-green); background: #eff6ff; color: var(--wa-green-strong); }
          .pf-tab.is-active { background: #202c33; }
 
          .pf-toolbar {
@@ -5917,7 +5917,7 @@ function abrirContatoDaAgenda(tarefa) {
          }
          .pf-filter-button.is-unread,
          .pf-filter-button.is-unread.is-active {
-           border-color: #35d6b4;
+           border-color: #60a5fa;
            background: var(--wa-green);
            color: #ffffff;
            box-shadow: none;
@@ -5960,7 +5960,7 @@ function abrirContatoDaAgenda(tarefa) {
          }
          .pf-prospect-item:hover { background: #f5f6f6; }
          .pf-prospect-item.is-active {
-           background: #d9fdd3;
+           background: #dbeafe;
            box-shadow: inset 3px 0 var(--wa-green);
          }
          .pf-prospect-avatar {
@@ -6093,7 +6093,7 @@ function abrirContatoDaAgenda(tarefa) {
            --wa-border: #29364e;
            --wa-text: #e9edef;
            --wa-muted: #8696a0;
-           --wa-outgoing: #005c4b;
+           --wa-outgoing: #1e3a5f;
            --wa-incoming: #17253c;
            background: #0b1120;
            color: #e9edef;
@@ -6101,7 +6101,7 @@ function abrirContatoDaAgenda(tarefa) {
          .pf-page.is-dark .pf-header h1 { color: #e9edef; }
          .pf-page.is-dark .pf-header h1 + p { color: #8696a0; }
          .pf-page.is-dark .pf-header div[class*="uppercase"] { color: #53bdeb; }
-         .pf-page.is-dark .pf-header > div:last-child > div > div:first-child { background: #17253c; color: #00a884; }
+         .pf-page.is-dark .pf-header > div:last-child > div > div:first-child { background: #17253c; color: #3b82f6; }
          .pf-page.is-dark .pf-theme-button,
          .pf-page.is-dark .pf-import-button {
            border-color: #29364e;
@@ -6110,11 +6110,11 @@ function abrirContatoDaAgenda(tarefa) {
            box-shadow: none;
          }
          .pf-page.is-dark .pf-theme-button:hover,
-         .pf-page.is-dark .pf-import-button:hover { border-color: #00a884; background: #1b2e49; color: #00d9a9; }
+         .pf-page.is-dark .pf-import-button:hover { border-color: #3b82f6; background: #1b2e49; color: #60a5fa; }
          .pf-page.is-dark .pf-tabs { border-color: #29364e; background: #121c2e; }
          .pf-page.is-dark .pf-tab { color: #8696a0; }
          .pf-page.is-dark .pf-tab:hover { background: #17253c; color: #e9edef; }
-         .pf-page.is-dark .pf-tab.is-active { background: #00a884; color: #fff; }
+         .pf-page.is-dark .pf-tab.is-active { background: #3b82f6; color: #fff; }
          .pf-page.is-dark .pf-toolbar { border-color: #29364e; background: #17253c; }
          .pf-page.is-dark .pf-search-input {
            border-color: #29364e;
@@ -6123,23 +6123,23 @@ function abrirContatoDaAgenda(tarefa) {
          }
          .pf-page.is-dark .pf-search-input::placeholder { color: #8696a0; }
          .pf-page.is-dark .pf-commercial-stage-filter {
-           border-color: #00a884;
+           border-color: #3b82f6;
            background: #29364e;
          }
-         .pf-page.is-dark .pf-commercial-stage-filter > span { color: #53e3bd; }
+         .pf-page.is-dark .pf-commercial-stage-filter > span { color: #60a5fa; }
          .pf-page.is-dark .pf-commercial-stage-filter select { color: #e9edef; }
          .pf-page.is-dark .pf-commercial-stage-filter option { background: #17253c; color: #e9edef; }
          .pf-page.is-dark .pf-refresh-button { border-color: #29364e; background: #29364e; }
          .pf-page.is-dark .pf-prospect-item { border-bottom-color: #17253c; color: #d1d7db; }
          .pf-page.is-dark .pf-prospect-item:hover { background: #17253c; }
-         .pf-page.is-dark .pf-prospect-item.is-active { background: #29364e; box-shadow: inset 3px 0 #00a884; }
+         .pf-page.is-dark .pf-prospect-item.is-active { background: #29364e; box-shadow: inset 3px 0 #3b82f6; }
          .pf-page.is-dark .pf-prospect-mode-shortcut { border-color: #29364e; background: #17253c; color: #aebac1; }
-         .pf-page.is-dark .pf-prospect-mode-shortcut:hover { border-color: #00a884; color: #53d6ba; }
+         .pf-page.is-dark .pf-prospect-mode-shortcut:hover { border-color: #3b82f6; color: #60a5fa; }
          .pf-page.is-dark .pf-prospect-name-row strong { color: #e9edef; }
          .pf-page.is-dark .pf-prospect-company,
          .pf-page.is-dark .pf-prospect-last-message { color: #8696a0; }
          .pf-page.is-dark .pf-prospect-name-row small { background: #29364e; color: #8696a0; }
-         .pf-page.is-dark .pf-prospect-item.is-active .pf-prospect-name-row small { background: #00a884; color: #fff; }
+         .pf-page.is-dark .pf-prospect-item.is-active .pf-prospect-name-row small { background: #3b82f6; color: #fff; }
          .pf-page.is-dark .pf-lead-info {
            border-color: #29364e;
            background: rgba(18,28,46,.96);
@@ -6157,7 +6157,7 @@ function abrirContatoDaAgenda(tarefa) {
          .pf-page.is-dark .pf-view-switcher { border-color: #29364e; background: #121c2e; }
          .pf-page.is-dark .pf-view-switcher button { color: #8696a0; }
          .pf-page.is-dark .pf-view-switcher button:hover { background: #17253c; color: #e9edef; }
-         .pf-page.is-dark .pf-view-switcher button.is-active { background: #00a884; color: #fff; }
+         .pf-page.is-dark .pf-view-switcher button.is-active { background: #3b82f6; color: #fff; }
          .pf-page.is-dark .pf-conversation-pane { border-color: #29364e; background: #0b1120; }
          .pf-page.is-dark .pf-conversation-header { border-bottom-color: #29364e; background: #121c2e; }
          .pf-page.is-dark .pf-conversation-header h2 { color: #e9edef; }
@@ -6170,13 +6170,13 @@ function abrirContatoDaAgenda(tarefa) {
          .pf-page.is-dark .pf-selected-pane .pf-lead-actions { border-top-color: #29364e; background: rgba(23,37,60,.97); }
          .pf-page.is-dark .pf-lead-actions button { border-color: #29364e; background: #17253c; color: #d1d7db; }
          .pf-page.is-dark .pf-lead-actions > button:first-child,
-         .pf-page.is-dark .pf-lead-actions .pf-action-reply { border-color: #00a884; background: #00a884; color: #fff; }
+         .pf-page.is-dark .pf-lead-actions .pf-action-reply { border-color: #3b82f6; background: #3b82f6; color: #fff; }
          .pf-page.is-dark .pf-action-call-chain { border-color: #2563eb !important; background: #172554 !important; color: #93c5fd !important; }
-         .pf-page.is-dark .pf-action-schedule { border-color: #087d69 !important; background: #163832 !important; color: #53d6ba !important; }
-         .pf-page.is-dark .pf-next-task { border-color: #176b5c; background: #132f2b; }
+         .pf-page.is-dark .pf-action-schedule { border-color: #1d4ed8 !important; background: #172554 !important; color: #60a5fa !important; }
+         .pf-page.is-dark .pf-next-task { border-color: #1e40af; background: #17253c; }
          .pf-page.is-dark .pf-next-task strong { color: #e9edef; }
          .pf-page.is-dark .pf-next-task small { color: #8696a0; }
-         .pf-page.is-dark .pf-next-task button { border-color: #29364e; background: #17253c; color: #53d6ba; }
+         .pf-page.is-dark .pf-next-task button { border-color: #29364e; background: #17253c; color: #60a5fa; }
          .pf-page.is-dark .pf-agenda-page { border-color: #29364e; background: #0b1120; }
          .pf-page.is-dark .pf-agenda-header { border-bottom-color: #29364e; background: #121c2e; }
          .pf-page.is-dark .pf-agenda-header h2 { color: #e9edef; }
@@ -6184,15 +6184,15 @@ function abrirContatoDaAgenda(tarefa) {
          .pf-page.is-dark .pf-agenda-header > button { border-color: #29364e; background: #17253c; color: #d1d7db; }
          .pf-page.is-dark .pf-agenda-toolbar { border-bottom-color: #29364e; background: #17253c; }
          .pf-page.is-dark .pf-agenda-filters button { background: #29364e; color: #d1d7db; }
-         .pf-page.is-dark .pf-agenda-filters button.is-active { background: #00a884; color: #fff; }
+         .pf-page.is-dark .pf-agenda-filters button.is-active { background: #3b82f6; color: #fff; }
          .pf-page.is-dark .pf-agenda-toolbar > input { border-color: #29364e; background: #29364e; color: #e9edef; }
-         .pf-page.is-dark .pf-task-card { border-color: #29364e; border-left-color: #00a884; background: #121c2e; }
+         .pf-page.is-dark .pf-task-card { border-color: #29364e; border-left-color: #3b82f6; background: #121c2e; }
          .pf-page.is-dark .pf-task-card.is-overdue { border-left-color: #ef4444; }
          .pf-page.is-dark .pf-task-title-row strong { color: #e9edef; }
          .pf-page.is-dark .pf-task-title-row span { background: #29364e; color: #aebac1; }
          .pf-page.is-dark .pf-task-content p { color: #aebac1; }
          .pf-page.is-dark .pf-task-actions button { border-color: #29364e; background: #17253c; color: #d1d7db; }
-         .pf-page.is-dark .pf-task-actions button.is-complete { border-color: #00a884; background: #00a884; color: #fff; }
+         .pf-page.is-dark .pf-task-actions button.is-complete { border-color: #3b82f6; background: #3b82f6; color: #fff; }
          .pf-page.is-dark .pf-task-form label > span { color: #d1d7db; }
          .pf-page.is-dark .pf-task-form input,
          .pf-page.is-dark .pf-task-form select,
@@ -6221,7 +6221,7 @@ function abrirContatoDaAgenda(tarefa) {
          .pf-page.is-dark .pf-section-header { border-bottom-color: #29364e; }
          .pf-page.is-dark .pf-section-header p,
          .pf-page.is-dark .pf-cadence-card p { color: #8696a0; }
-         .pf-page.is-dark .pf-cadence-card:hover { border-color: #00a884; background: #17253c; }
+         .pf-page.is-dark .pf-cadence-card:hover { border-color: #3b82f6; background: #17253c; }
          .pf-page.is-dark .pf-modal { border-color: #29364e; background: #121c2e; color: #e9edef; }
          .pf-page.is-dark .pf-modal-titlebar,
          .pf-page.is-dark .pf-modal-footer { border-color: #29364e; background: #17253c; }
@@ -6233,7 +6233,7 @@ function abrirContatoDaAgenda(tarefa) {
          .pf-page.is-dark .pf-chat-row.is-system .pf-chat-bubble { background: #0d1626; color: #8696a0; }
          .pf-page.is-dark .pf-sidebar-resizer { border-color: #29364e; background: #17253c; }
          .pf-page.is-dark .pf-sidebar-resizer button { border-color: #29364e; background: #121c2e; color: #aebac1; }
-         .pf-page.is-dark .pf-sidebar-resizer button:hover { border-color: #00a884; color: #00cfa5; }
+         .pf-page.is-dark .pf-sidebar-resizer button:hover { border-color: #3b82f6; color: #60a5fa; }
 
          @media (max-width: 1100px) {
            .pf-commercial-workspace { grid-template-columns: min(var(--pf-prospect-width, 330px), 42vw) 18px minmax(0,1fr); }
@@ -6308,11 +6308,11 @@ function abrirContatoDaAgenda(tarefa) {
   justify-content: center;
   gap: 5px;
   margin-left: auto;
-  border: 1px solid #14b8a6 !important;
+  border: 1px solid #3b82f6 !important;
   border-radius: 7px;
   padding: 5px 9px !important;
-  background: #ecfdf5 !important;
-  color: #047857 !important;
+  background: #eff6ff !important;
+  color: #1d4ed8 !important;
   font-size: 9px !important;
   font-weight: 900 !important;
   white-space: nowrap;
@@ -6320,7 +6320,7 @@ function abrirContatoDaAgenda(tarefa) {
 }
 
 .pf-lead-agenda-button:hover {
-  background: #00a884 !important;
+  background: #3b82f6 !important;
   color: #ffffff !important;
 }
 
@@ -6330,13 +6330,13 @@ function abrirContatoDaAgenda(tarefa) {
 }
 
 .pf-page.is-dark .pf-lead-agenda-button {
-  border-color: #087d69 !important;
-  background: #163832 !important;
-  color: #53d6ba !important;
+  border-color: #1d4ed8 !important;
+  background: #172554 !important;
+  color: #60a5fa !important;
 }
 
 .pf-page.is-dark .pf-lead-agenda-button:hover {
-  background: #00a884 !important;
+  background: #3b82f6 !important;
   color: #ffffff !important;
        }
   .pf-no-contact-icon {
@@ -6348,19 +6348,19 @@ function abrirContatoDaAgenda(tarefa) {
  .pf-task-actions .pf-task-contact-button {
   min-height: 30px;
   padding: 5px 10px;
-  border: 1px solid rgba(0, 168, 132, 0.4) !important;
+  border: 1px solid rgba(59, 130, 246, 0.4) !important;
   border-radius: 8px;
-  background: rgba(0, 168, 132, 0.08) !important;
-  color: #6edbc5 !important;
+  background: rgba(59, 130, 246, 0.08) !important;
+  color: #93c5fd !important;
   font-size: 13px;
   font-weight: 600;
   box-shadow: none;
 }
 
 .pf-task-actions .pf-task-contact-button:hover {
-  border-color: rgba(0, 168, 132, 0.7) !important;
-  background: rgba(0, 168, 132, 0.16) !important;
-  color: #9aead9 !important;
+  border-color: rgba(59, 130, 246, 0.7) !important;
+  background: rgba(59, 130, 246, 0.16) !important;
+  color: #bfdbfe !important;
 }
 .pf-page .pf-next-task button {
   min-height: 27px !important;
@@ -6414,7 +6414,7 @@ function abrirContatoDaAgenda(tarefa) {
   font-weight: 500; cursor: pointer; color-scheme: dark;
 }
 .pf-page .pf-contact-day-filter.is-active {
-  background: #008f78; border-color: #00a884; color: #fff;
+  background: #2563eb; border-color: #3b82f6; color: #fff;
 }
 .pf-page .pf-contact-day-filter option { background: #202c33; color: #f1f5f9; }
 
@@ -6424,14 +6424,14 @@ function abrirContatoDaAgenda(tarefa) {
 .pf-page a.pf-whatsapp-web-button {
   display: inline-flex; align-items: center; justify-content: center;
   min-height: 23px; padding: 3px 7px;
-  border: 1px solid #b4d7cd; border-radius: 5px;
-  background: #f0faf6; color: #16775f;
+  border: 1px solid #bfdbfe; border-radius: 5px;
+  background: #eff6ff; color: #1d4ed8;
   font-size: 10px !important; font-weight: 500 !important;
   line-height: 1.2; text-decoration: none; white-space: nowrap;
 }
-.pf-page a.pf-whatsapp-web-button:hover { background: #dcf5e9; }
+.pf-page a.pf-whatsapp-web-button:hover { background: #dbeafe; }
 .pf-page.is-dark a.pf-whatsapp-web-button {
-  background: #17253c; color: #90d6bc; border-color: #3b5b50;
+  background: #17253c; color: #93c5fd; border-color: #334d76;
 }
 .pf-page.is-dark a.pf-whatsapp-web-button:hover { background: #29364e; }
 
@@ -6740,8 +6740,8 @@ function abrirContatoDaAgenda(tarefa) {
 }
 
 .pf-page.is-dark .pf-import-type button.is-active {
-  border-color: #00a884 !important;
-  background: #163832 !important;
+  border-color: #3b82f6 !important;
+  background: #172554 !important;
 }
 
 .pf-page.is-dark .pf-file-picker {
@@ -6886,7 +6886,7 @@ function abrirContatoDaAgenda(tarefa) {
   margin: 0 4px;
   overflow: hidden;
   border-radius: 999px;
-  background: rgba(0, 168, 132, 0.12);
+  background: rgba(59, 130, 246, 0.12);
 }
 
 .pf-updating-line span {
@@ -6895,7 +6895,7 @@ function abrirContatoDaAgenda(tarefa) {
   bottom: 0;
   width: 35%;
   border-radius: 999px;
-  background: #00a884;
+  background: #3b82f6;
   animation: pf-loading-move 0.8s ease-in-out infinite;
 }
 
