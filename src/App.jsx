@@ -8,11 +8,13 @@ import ProspectFlow from './pages/ProspectFlow';
 import Surveys from './pages/Surveys';
 import Company from './pages/Company';
 import Campaigns from './pages/Campaigns';
+import Professionals from './pages/Professionals';
 import './AppNavigation.css';
 
 const operationItems = [
   ['prospect', 'Contatos e conversas', 'contacts'],
   ['agenda', 'Agenda', 'calendar'],
+  ['professionals', 'Profissionais', 'professionals'],
   ['research', 'Pesquisas e campanhas', 'campaign'],
 ];
 const settingsItems = [
@@ -24,6 +26,7 @@ const pageTitles = Object.fromEntries([...operationItems, ...settingsItems].map(
 function NavIcon({name}) {
   const paths = {
     contacts: <><circle cx="9" cy="8" r="3"/><path d="M3 20v-2a6 6 0 0 1 12 0v2M16 5a3 3 0 0 1 0 6M21 20v-2a6 6 0 0 0-4-5.65"/></>,
+    professionals: <><circle cx="9" cy="7" r="3"/><path d="M3 21v-3a6 6 0 0 1 12 0v3M19 8v6M16 11h6M17 18h5"/></>,
     calendar: <><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18M8 15h2M14 15h2"/></>,
     campaign: <><path d="m3 10 14-5v14L3 14zM7 16l1 5h4l-2-6M21 9v6"/></>,
     connection: <><path d="M8 12h8M9 7V3M15 7V3M6 7h12v4a6 6 0 0 1-12 0zM12 17v4"/></>,
@@ -150,7 +153,7 @@ export default function App() {
       <header className="app-header workspace-header"><button ref={menuRef} type="button" className="secondary mobile-menu-toggle" aria-expanded={mobileMenuOpen} aria-controls="workspace-navigation" aria-label={mobileMenuOpen ? 'Fechar menu' : 'Abrir menu'} onClick={() => setMobileMenuOpen(value => !value)}><NavIcon name="menu"/></button><div className="workspace-heading"><span className="workspace-page-name">{pageTitles[page]}</span><span className="workspace-company-name">{session.empresa.nome}</span></div><div className="header-actions"><ThemeButton/><button className="secondary" disabled={busy} onClick={exit}>{busy ? 'Saindo…' : 'Sair'}</button></div></header>
       <div id="workspace-content" className="app-content" tabIndex={-1}>
         {error && <p role="alert" className="error workspace-error">{error}</p>}
-        {page === 'prospect' || page === 'agenda' ? <ProspectFlow key={session.empresa.id} view={page === 'agenda' ? 'agenda' : 'contacts'}/> : page === 'research' ? <ResearchWorkspace key={session.empresa.id}/> : page === 'connection' ? <Connection key={session.empresa.id} empresaId={session.empresa.id}/> : <Company key={session.empresa.id}/>}
+        {page === 'prospect' || page === 'agenda' ? <ProspectFlow key={session.empresa.id} view={page === 'agenda' ? 'agenda' : 'contacts'}/> : page === 'professionals' ? <Professionals key={session.empresa.id}/> : page === 'research' ? <ResearchWorkspace key={session.empresa.id}/> : page === 'connection' ? <Connection key={session.empresa.id} empresaId={session.empresa.id}/> : <Company key={session.empresa.id}/>}
       </div>
     </div>
   </div>;
