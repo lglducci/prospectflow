@@ -373,12 +373,15 @@ function statusEntregaVisual(interacao) {
      .toUpperCase();
  }
  
- export default function ProspectFlow() {
+ export default function ProspectFlow({view = "contacts"}) {
    const {session} = useAuth();
    const empresaId = session.empresa.id;
-   const {dark:temaEscuro,setDark:setTemaEscuro} = useTheme();
+   const {dark:temaEscuro} = useTheme();
  
-   const [aba, setAba] = useState("LEADS");
+   const [aba, setAba] = useState(() => view === "agenda" ? "AGENDA" : "LEADS");
+   useEffect(() => {
+     setAba(view === "agenda" ? "AGENDA" : "LEADS");
+   }, [view]);
    const [filtro, setFiltro] = useState("NOVO");
    const [etapaFiltro, setEtapaFiltro] = useState("TODAS");
    const [segmentoFiltro, setSegmentoFiltro] = useState("");
@@ -460,8 +463,7 @@ const [agendaLead, setAgendaLead] = useState([]);
 const [resumoLeadAgenda, setResumoLeadAgenda] = useState({});
 
 
-const [qrCodeWhatsApp, setQrCodeWhatsApp] = useState(null);
-const [carregandoQr, setCarregandoQr] = useState(false);
+
 
 useEffect(() => {
   modoPainelRef.current = modoPainel;
@@ -501,51 +503,6 @@ useEffect(() => {
     document.body.style.userSelect = selecaoAnterior;
   };
 }, [ajustarLarguraListaProspects, redimensionandoLista]);
-
-async function gerarQrCodeWhatsApp() {
-  try {
-    setCarregandoQr(true);
-
-    const resposta = await fetch(
-      buildWebhookUrl("prospectflow-conectar-whatsapp"),
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          empresa_id: empresaId,
-        }),
-      },
-    );
-
-    const dados = await resposta.json();
-
-    // Funciona mesmo se o n8n ainda devolver array.
-    const resultado = Array.isArray(dados) ? dados[0] : dados;
-
-    if (resultado.status === "PRECISA_QR" && resultado.qrCode) {
-      setQrCodeWhatsApp(resultado.qrCode);
-      return;
-    }
-
-    if (resultado.status === "CONECTADO") {
-      alert("O WhatsApp já está conectado.");
-      return;
-    }
-
-    throw new Error(
-      resultado.mensagem || "Não foi possível gerar o QR Code.",
-    );
-  } catch (erro) {
-    console.error(erro);
-    alert(erro.message || "Erro ao gerar QR Code.");
-  } finally {
-    setCarregandoQr(false);
-  }
-}
-
-
 
    useEffect(() => {
      try {
@@ -2117,18 +2074,18 @@ function abrirContatoDaAgenda(tarefa) {
                </div>
                <div>
                  <div className="mb-1 text-[10px] font-black uppercase tracking-[0.22em] text-sky-300">
-                   Central comercial
+                   {view === "agenda" ? "Organização e acompanhamento" : "Central comercial"}
                  </div>
                  <h1 className="text-2xl font-black tracking-tight">
-                   ProspectFlow
+                   {view === "agenda" ? "Agenda" : "Contatos e conversas"}
                  </h1>
                  <p className="mt-1 text-sm font-medium text-slate-300">
-                   Abra a fila, envie a mensagem indicada e registre o resultado.
+                   {view === "agenda" ? "Acompanhe os compromissos e as próximas ações dos seus contatos." : "Organize seus contatos, acompanhe oportunidades e continue suas conversas."}
                  </p>
                </div>
              </div>
  
-             <div className="pf-header-actions">
+             {view !== "agenda" && <div className="pf-header-actions">
 
               <button
                 type="button"
@@ -2138,25 +2095,6 @@ function abrirContatoDaAgenda(tarefa) {
                 <span aria-hidden="true">▥</span>
                 Análise de atividade
               </button>
-
-              <button
-                    type="button"
-                    onClick={gerarQrCodeWhatsApp}
-                    disabled={carregandoQr}
-                  >
-                    {carregandoQr ? "Gerando QR Code..." : "Reconectar WhatsApp"}
-                  </button>
-
-               <button
-                 type="button"
-                 onClick={() => setTemaEscuro((atual) => !atual)}
-                 className="pf-theme-button"
-                 aria-pressed={temaEscuro}
-                 title={temaEscuro ? "Usar tema claro" : "Usar tema escuro"}
-               >
-                 <span aria-hidden="true">{temaEscuro ? "☀" : "☾"}</span>
-                 {temaEscuro ? "Claro" : "Escuro"}
-               </button>
 
                 <button
                 type="button"
@@ -2176,7 +2114,7 @@ function abrirContatoDaAgenda(tarefa) {
                  onClick={abrirImportacao}
                  className="pf-import-button"
                >
-                 ⇧ Importar leads
+                 ⇧ Importar contatos
                </button>
                <button
                  type="button"
@@ -2184,14 +2122,14 @@ function abrirContatoDaAgenda(tarefa) {
                  className="pf-primary-button"
                >
                  <span className="text-lg leading-none">＋</span>
-                 Cadastrar lead
+                 Cadastrar contato
                </button>
-             </div>
+             </div>}
            </div>
          </header>
  
          <main className="pf-main">
-           <div className="pf-tabs">
+           {view !== "agenda" && <div className="pf-tabs">
              <button
                type="button"
                onClick={() => setAba("LEADS")}
@@ -2210,17 +2148,6 @@ function abrirContatoDaAgenda(tarefa) {
              </button>
              <button
                type="button"
-               onClick={() => setAba("AGENDA")}
-               className={`pf-tab ${aba === "AGENDA" ? "is-active" : ""}`}
-             >
-               <span>◷</span>
-               Agenda
-               {Number(resumoAgenda.hoje || 0) > 0 && (
-                 <strong className="pf-tab-count">{resumoAgenda.hoje}</strong>
-               )}
-             </button>
-             <button
-               type="button"
                onClick={() => setAba("LIGACOES")}
                className={`pf-tab ${aba === "LIGACOES" ? "is-active" : ""}`}
              >
@@ -2236,7 +2163,7 @@ function abrirContatoDaAgenda(tarefa) {
                className={`pf-tab ${modalAtividades ? "is-active" : ""}`}>
                <span>▤</span> Atividades
              </button>
-           </div>
+           </div>}
  
            {erro && <div className="pf-error">{erro}</div>}
  
@@ -4855,72 +4782,6 @@ function abrirContatoDaAgenda(tarefa) {
           }}
         >
           + Agendar nova ação
-        </button>
-      </div>
-    </div>
-  </div>
-)}
-
- {qrCodeWhatsApp && (
-  <div
-    className="pf-modal-overlay"
-    onMouseDown={() => setQrCodeWhatsApp(null)}
-  >
-    <div
-      className="pf-modal pf-modal-sm"
-      onMouseDown={(evento) => evento.stopPropagation()}
-    >
-      <div className="pf-modal-titlebar">
-        <div>
-          <h2>Reconectar WhatsApp</h2>
-          <p>Escaneie o QR Code utilizando o celular.</p>
-        </div>
-
-        <button
-          type="button"
-          onClick={() => setQrCodeWhatsApp(null)}
-          aria-label="Fechar"
-        >
-          ✕
-        </button>
-      </div>
-
-      <div className="pf-modal-body">
-        <div className="rounded-xl bg-slate-50 p-4 text-center">
-          <p className="mb-4 text-sm text-slate-600">
-            No celular, abra o WhatsApp, acesse{" "}
-            <strong>Aparelhos conectados</strong> e escolha{" "}
-            <strong>Conectar um aparelho</strong>.
-          </p>
-
-          <img
-            src={qrCodeWhatsApp}
-            alt="QR Code para reconectar o WhatsApp"
-            style={{
-              display: "block",
-              width: "280px",
-              height: "280px",
-              maxWidth: "100%",
-              margin: "0 auto",
-              borderRadius: "12px",
-              background: "#ffffff",
-              padding: "8px",
-            }}
-          />
-
-          <p className="mt-4 text-xs text-slate-500">
-            O QR Code expira em pouco tempo. Caso expire, feche esta janela e
-            gere um novo.
-          </p>
-        </div>
-      </div>
-
-      <div className="pf-modal-footer">
-        <button
-          type="button"
-          onClick={() => setQrCodeWhatsApp(null)}
-        >
-          Fechar
         </button>
       </div>
     </div>
