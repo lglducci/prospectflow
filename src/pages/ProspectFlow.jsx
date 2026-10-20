@@ -427,6 +427,11 @@ function statusEntregaVisual(interacao) {
    const [buscaAgenda, setBuscaAgenda] = useState("");
    const [modalTarefa, setModalTarefa] = useState(false);
    const [formTarefa, setFormTarefa] = useState(tarefaVazia);
+   const [agendamentoPelaAgenda, setAgendamentoPelaAgenda] = useState(false);
+   const [buscaContatoAgenda, setBuscaContatoAgenda] = useState("");
+   const [contatosNovaAgenda, setContatosNovaAgenda] = useState([]);
+   const [carregandoContatosAgenda, setCarregandoContatosAgenda] = useState(false);
+   const [erroContatosAgenda, setErroContatosAgenda] = useState("");
    const [modalAdiamento, setModalAdiamento] = useState(null);
 
    const [ligacoes, setLigacoes] = useState([]);
@@ -1715,7 +1720,50 @@ function agendamentoInicial() {
   }
 }
 
+   useEffect(() => {
+     if (!modalTarefa || !agendamentoPelaAgenda || formTarefa.lead) return;
+     let cancelado = false;
+     setCarregandoContatosAgenda(true);
+     setErroContatosAgenda("");
+     setContatosNovaAgenda([]);
+     const timer = window.setTimeout(async () => {
+       try {
+         const retorno = await chamarApi("LISTAR_LEADS", {
+           filtro: "TODOS",
+           etapa_comercial: "TODAS",
+           busca: buscaContatoAgenda.trim(),
+         });
+         if (!Array.isArray(retorno?.dados)) throw new Error("Não foi possível obter a lista de contatos.");
+         if (!cancelado) setContatosNovaAgenda(retorno.dados.filter(contato => contato?.id));
+       } catch (e) {
+         if (!cancelado) setErroContatosAgenda(e.message || "Erro ao buscar contatos.");
+       } finally {
+         if (!cancelado) setCarregandoContatosAgenda(false);
+       }
+     }, 250);
+     return () => { cancelado = true; window.clearTimeout(timer); };
+   }, [modalTarefa, agendamentoPelaAgenda, formTarefa.lead, buscaContatoAgenda, chamarApi]);
+
+   function novoAgendamentoDaAgenda() {
+     setAgendamentoPelaAgenda(true);
+     setBuscaContatoAgenda("");
+     setContatosNovaAgenda([]);
+     setErroContatosAgenda("");
+     setFormTarefa({...tarefaVazia, agendada_para: agendamentoInicial()});
+     setModalTarefa(true);
+   }
+
+   function selecionarContatoDoAgendamento(contato) {
+     setFormTarefa(atual => ({
+       ...atual,
+       lead: contato,
+       titulo: atual.titulo || `Reunião com ${contato.empresa_nome || contato.nome}`,
+       participante_email: contato.email || "",
+     }));
+   }
+
    function abrirAgendamento(lead) {
+     setAgendamentoPelaAgenda(false);
      setFormTarefa({
        ...tarefaVazia,
        lead,
@@ -3060,9 +3108,14 @@ function abrirContatoDaAgenda(tarefa) {
                    <h2>Agenda comercial</h2>
                    <p>Ações manuais programadas sem alterar a cadência dos leads.</p>
                  </div>
-                 <button type="button" onClick={() => carregarTarefas()}>
-                   ↻ Atualizar
-                 </button>
+                 <div className="pf-agenda-create-actions">
+                   <button type="button" className="pf-primary-button" onClick={novoAgendamentoDaAgenda}>
+                     ＋ Novo agendamento
+                   </button>
+                   <button type="button" onClick={() => carregarTarefas()}>
+                     ↻ Atualizar
+                   </button>
+                 </div>
                </div>
 
                <div className="pf-agenda-toolbar">
@@ -3093,7 +3146,7 @@ function abrirContatoDaAgenda(tarefa) {
                  <div className="pf-agenda-empty">
                    <span>✓</span>
                    <strong>Nenhuma ação neste filtro</strong>
-                   <p>Agende a próxima ação diretamente no cadastro de um lead.</p>
+                   <p>Use Novo agendamento para escolher um contato e programar a próxima ação.</p>
                  </div>
                ) : (
                  <div className="pf-task-list">
@@ -3805,7 +3858,7 @@ function abrirContatoDaAgenda(tarefa) {
          </div>
        )}
  
-       {modalTarefa && formTarefa.lead && (
+       {modalTarefa && (
          <div className="pf-modal-overlay">
            <div className="pf-modal pf-modal-sm">
              <div className="pf-modal-titlebar pf-task-modal-titlebar">
@@ -3815,12 +3868,37 @@ function abrirContatoDaAgenda(tarefa) {
                      ? "Agendar reunião"
                      : "Agendar próxima ação"}
                  </h2>
-                 <p>{formTarefa.lead.empresa_nome || formTarefa.lead.nome}</p>
+                 <p>{formTarefa.lead?.empresa_nome || formTarefa.lead?.nome || "Escolha o contato para este agendamento."}</p>
                </div>
                <button type="button" onClick={() => setModalTarefa(false)}>✕</button>
              </div>
 
              <div className="pf-modal-body pf-task-form">
+               {agendamentoPelaAgenda && (
+                 <div className="pf-agenda-contact-picker">
+                   {formTarefa.lead ? (
+                     <div className="pf-agenda-contact-selected">
+                       <div><strong>{formTarefa.lead.nome}</strong><small>{[formTarefa.lead.empresa_nome, formTarefa.lead.telefone].filter(Boolean).join(" · ")}</small></div>
+                       <button type="button" onClick={() => setFormTarefa(atual => ({...atual, lead: null}))}>Trocar contato</button>
+                     </div>
+                   ) : (
+                     <>
+                       <label>
+                         <span>Contato do agendamento</span>
+                         <input type="search" autoFocus value={buscaContatoAgenda} onChange={event => setBuscaContatoAgenda(event.target.value)} placeholder="Buscar por nome, empresa ou telefone..." />
+                       </label>
+                       <div className="pf-agenda-contact-results" aria-label="Contatos encontrados" aria-busy={carregandoContatosAgenda}>
+                         {carregandoContatosAgenda ? <p role="status">Buscando contatos...</p> : erroContatosAgenda ? <p role="alert">{erroContatosAgenda}</p> : contatosNovaAgenda.length === 0 ? <p role="status">Nenhum contato encontrado. Cadastre o contato em Contatos e conversas ou tente outra busca.</p> : contatosNovaAgenda.map(contato => (
+                           <button type="button" key={contato.id} aria-label={`Selecionar contato ${contato.nome || contato.empresa_nome}`} onClick={() => selecionarContatoDoAgendamento(contato)}>
+                             <strong>{contato.nome || contato.empresa_nome}</strong>
+                             <small>{[contato.empresa_nome, contato.telefone].filter(Boolean).join(" · ")}</small>
+                           </button>
+                         ))}
+                       </div>
+                     </>
+                   )}
+                 </div>
+               )}
                <label>
                  <span>O que deve ser feito?</span>
                  <select
@@ -3968,7 +4046,7 @@ function abrirContatoDaAgenda(tarefa) {
                <button
                  type="button"
                  onClick={salvarTarefa}
-                 disabled={executando === "SALVAR_TAREFA"}
+                 disabled={executando === "SALVAR_TAREFA" || !formTarefa.lead?.id}
                >
                  {executando === "SALVAR_TAREFA"
                    ? "Salvando..."
@@ -5010,6 +5088,17 @@ function abrirContatoDaAgenda(tarefa) {
        )}
  
        <style>{`
+         .pf-agenda-create-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+         .pf-agenda-create-actions .pf-primary-button{background:#2563eb;color:#fff;border-color:#2563eb}
+         .pf-agenda-contact-picker{padding-bottom:16px;border-bottom:1px solid var(--border,#cbd5e1);margin-bottom:16px}
+         .pf-agenda-contact-results{max-height:200px;overflow:auto;display:grid;gap:6px}
+         .pf-agenda-contact-results>button{display:flex;flex-direction:column;align-items:flex-start;text-align:left;gap:4px;padding:10px 12px;background:var(--soft,#eff6ff);color:var(--text,#0f172a);border:1px solid var(--border,#cbd5e1);border-radius:8px;width:100%;min-width:0}
+         .pf-agenda-contact-results>button:hover{border-color:#3b82f6}
+         .pf-agenda-contact-results small,.pf-agenda-contact-selected small{display:block;overflow-wrap:anywhere;font-size:12px}
+         .pf-agenda-contact-selected{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+         .pf-agenda-contact-selected>div{min-width:0;overflow-wrap:anywhere}
+         .pf-agenda-contact-results>p{font-size:13px}
+
          .pf-activities-topbar { display: flex; align-items: center; gap: 14px; padding: 12px 16px 6px; flex-wrap: wrap; }
          .pf-activities-topbar > span { font-size: 12px; color: #64748b; }
          .pf-activities-periods { display: flex; gap: 6px; padding: 8px 16px; flex-wrap: wrap; }
