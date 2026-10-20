@@ -1,0 +1,51 @@
+/* Navegação principal; os estilos de login continuam em styles.css. */
+.app-layout{--sidebar-width:236px;display:grid;grid-template-columns:var(--sidebar-width) minmax(0,1fr);min-height:100vh;background:var(--bg);color:var(--text)}
+.app-layout.is-collapsed{--sidebar-width:80px}
+.app-sidebar{position:sticky;top:0;align-self:start;display:flex;flex-direction:column;height:100vh;height:100dvh;min-width:0;padding:22px 14px 18px;background:var(--surface);border-right:1px solid var(--border);overflow-y:auto}
+.sidebar-brand{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:40px;padding:0 5px}
+.sidebar-full-brand{font-size:24px;letter-spacing:-1px;white-space:nowrap}.sidebar-short-brand{display:none;font-size:22px}
+.sidebar-collapse{display:flex;align-items:center;justify-content:center;flex-shrink:0;width:26px;height:30px;padding:3px;background:transparent;color:var(--muted);border:1px solid var(--border);border-radius:7px}
+.sidebar-company{font-size:12px;color:var(--muted);padding:10px 6px 22px;overflow-wrap:anywhere}
+.sidebar-navigation{display:flex;flex-direction:column;flex:1;gap:32px;min-height:280px;margin-top:14px}
+.sidebar-group-label{font-size:10px;font-weight:700;letter-spacing:1px;margin:0 8px 12px;color:var(--muted)}
+.sidebar-item{display:flex;align-items:center;gap:11px;width:100%;margin:5px 0;padding:12px 10px;border:1px solid transparent;border-radius:10px;background:transparent;text-align:left;font-size:13px;line-height:1.5;color:var(--muted)}
+.sidebar-item svg{flex-shrink:0}.sidebar-item:hover{background:var(--soft);color:var(--text)}.sidebar-item.is-active{background:var(--soft);color:var(--accent);border-color:var(--border)}
+.sidebar-settings{margin-top:auto;padding-top:20px;border-top:1px solid var(--border)}
+.app-layout.is-collapsed .sidebar-label,.app-layout.is-collapsed .sidebar-full-brand{display:none}
+.app-layout.is-collapsed .sidebar-short-brand{display:block}
+.app-layout.is-collapsed .sidebar-brand{flex-direction:column;gap:12px;padding-bottom:14px}
+.app-layout.is-collapsed .sidebar-item{justify-content:center;padding:13px 8px}
+.app-workspace,.app-content{min-width:0}.app-content{padding-bottom:24px;outline-offset:-3px}
+.app-layout .workspace-header{min-height:79px;padding:16px 24px;gap:16px;background:var(--bg);border-bottom:1px solid var(--border)}
+.workspace-heading{display:flex;flex-direction:column;gap:4px;min-width:0}.workspace-page-name{font-size:14px;font-weight:600}.workspace-company-name{font-size:12px;color:var(--muted);overflow-wrap:anywhere}
+.app-layout .header-actions{display:flex;align-items:center;gap:8px;flex-shrink:0}.app-layout .header-actions button{padding:9px 13px;font-size:12px}
+.app-layout .mobile-menu-toggle{display:none}.workspace-error{margin:20px 24px}
+.app-skip-link{position:fixed;top:-100px;left:16px;z-index:9999;background:var(--button);color:#fff;padding:12px 16px;border-radius:8px}.app-skip-link:focus{top:12px}
+.research-workspace{max-width:1200px;margin:0 auto;padding:28px 24px}
+.workspace-intro h1{font-size:28px}.workspace-intro p{font-size:14px;margin:0 0 20px}
+.workspace-tabs{display:flex;gap:6px;padding:5px;border:1px solid var(--border);background:var(--surface);border-radius:11px;width:fit-content;max-width:100%;margin-bottom:24px}
+.workspace-tabs button{background:transparent;color:var(--muted);padding:10px 18px;font-size:13px}.workspace-tabs button[aria-selected=true]{background:var(--button);color:#fff}
+.research-workspace>.workspace-tabs+div>.content{margin:0;max-width:none;padding:0}
+.connection-page{max-width:960px}.connection-card{max-width:720px}.connection-heading{display:flex;align-items:center;gap:14px;margin-bottom:20px}.connection-heading h2{margin-bottom:4px}.connection-heading p{margin:0;font-size:13px}
+.connection-icon{display:grid;place-items:center;width:44px;height:44px;flex-shrink:0;border-radius:12px;background:var(--soft);color:var(--accent)}
+.connection-status{display:flex;align-items:center;gap:9px;font-size:14px;margin:0 0 8px;color:var(--muted)}.connection-status.is-conectado{color:var(--notice)}.connection-status.is-erro{color:var(--error)}.connection-status.is-precisa_qr{color:var(--accent)}
+.connection-checked{display:block;margin-bottom:18px}.connection-card>.primary{margin-top:12px;max-width:100%;white-space:normal}
+.connection-qr{margin-top:24px;padding-top:24px;border-top:1px solid var(--border);text-align:center}.connection-qr p{font-size:14px}.connection-qr img{display:block;width:280px;height:auto;max-width:100%;padding:10px;border-radius:12px;background:#fff;margin:18px auto}.connection-qr small{display:block;max-width:420px;margin:0 auto}.connection-help{font-size:12px;margin-top:22px;margin-bottom:0}
+/* Ajustes para a tela comercial dentro do novo espaço de trabalho. */
+.app-layout .pf-page{padding:18px 22px 40px}.app-layout .pf-header-actions{flex-wrap:wrap;justify-content:flex-end}.app-layout .pf-header>div:last-child{flex-wrap:wrap}.app-layout .pf-tabs{max-width:100%;flex-wrap:wrap}
+@media(max-width:1100px) and (min-width:761px){.app-layout{--sidebar-width:208px}.app-layout.is-collapsed{--sidebar-width:80px}.sidebar-full-brand{font-size:21px}.sidebar-item{font-size:12px;padding:11px 8px;gap:8px}.app-layout .pf-page{padding:16px 16px 32px}}
+@media(max-width:760px){
+ .app-layout,.app-layout.is-collapsed{display:flex;flex-direction:column}
+ .app-sidebar{position:static;order:1;height:auto;min-height:0;width:100%;padding:0 16px;border-right:0;border-bottom:1px solid var(--border);overflow:visible}
+ .app-workspace{display:contents}.app-layout .workspace-header{order:0;padding:14px 16px;gap:10px;flex-wrap:wrap}.app-content{order:2;width:100%}
+ .app-layout .mobile-menu-toggle{display:flex;align-items:center;justify-content:center;padding:8px}.workspace-heading{flex:1}.workspace-page-name{font-size:13px}
+ .app-layout .header-actions{margin-left:auto}.app-layout .header-actions button{padding:8px 10px}
+ .sidebar-brand,.sidebar-company,.app-layout.is-collapsed .sidebar-brand{display:none}
+ .sidebar-navigation{display:none;min-height:0;gap:16px;margin:0;padding:14px 0}
+ .app-layout.is-mobile-menu-open .sidebar-navigation{display:flex}
+ .app-layout.is-collapsed .sidebar-label{display:block}
+ .app-layout.is-collapsed .sidebar-item{justify-content:flex-start;padding:12px 10px}
+ .sidebar-settings{margin-top:0;padding-top:14px}.sidebar-group-label{margin-bottom:8px}.sidebar-item{font-size:13px}
+ .research-workspace{padding:24px 16px}.workspace-intro h1{font-size:24px}.app-layout .pf-page{padding:16px 12px 28px}.app-layout .pf-header-actions{justify-content:flex-start}.connection-heading{align-items:flex-start}.connection-page .page-title{margin-bottom:18px}
+}
+@media(prefers-reduced-motion:reduce){.app-layout .pf-page{transition:none}}
