@@ -134,6 +134,7 @@
   margin-bottom: 20px;
 }
 .pfn-agenda label {
+  margin: 0;
   display: grid;
   gap: 7px;
   font-size: 12px;
@@ -611,8 +612,8 @@
   margin: 0;
   line-height: 20px;
 }
-.pfn-booking-search > button,
-.pfn-booking-availability > button {
+.pfn-agenda .pfn-booking-search > button,
+.pfn-agenda .pfn-booking-availability > button {
   height: 36px;
   min-height: 36px;
   align-self: end;
@@ -1160,7 +1161,7 @@
   gap: 12px;
   margin-bottom: 20px;
 }
-.pfn-today-filters :is(select, button) {
+.pfn-agenda .pfn-today-filters :is(select, button) {
   height: 35px;
   min-height: 35px;
   line-height: 19px;
