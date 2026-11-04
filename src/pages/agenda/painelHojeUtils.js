@@ -1,4 +1,4 @@
-import { pfLocal, pfSituacao } from "./agendaUtils";
+import { pfLocal, pfSituacao, pfHistorico } from "./agendaUtils";
 
 // Nenhuma resposta ausente ou com falha é interpretada como horário livre.
 export function montarPainelHoje(agendas, profissionais, falhas, hoje, agora) {
@@ -39,7 +39,7 @@ export function montarPainelHoje(agendas, profissionais, falhas, hoje, agora) {
     ]) {
       if (
         t.id == null ||
-        t.status === "CANCELADA" ||
+        pfHistorico(t) ||
         (t.profissional_id != null &&
           String(t.profissional_id) !== String(p.id))
       )
@@ -80,7 +80,7 @@ export function montarPainelHoje(agendas, profissionais, falhas, hoje, agora) {
       for (const t of h?.agendamentos || []) {
         if (
           t.id == null ||
-          t.status === "CANCELADA" ||
+          pfHistorico(t) ||
           (t.profissional_id != null &&
             String(t.profissional_id) !== String(p.id))
         )

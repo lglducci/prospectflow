@@ -1543,3 +1543,83 @@
     padding: 11px;
   }
 }
+
+/* Histórico da agenda profissional: não ocupa nem altera horários. */
+.pfn-agenda [hidden] { display: none !important; }
+.pfn-professional-subtabs { padding: 20px 20px 0; }
+.pfn-movements > .pfn-today-subtabs { margin-bottom: 22px; }
+.pfn-movement-table-wrap { overflow-x: auto; border: 1px solid var(--pfn-line); border-radius: 8px; }
+.pfn-movement-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 12px; }
+.pfn-movement-table caption { text-align: left; padding: 12px; color: var(--pfn-muted); }
+.pfn-movement-table th { background: var(--pfn-soft); white-space: nowrap; }
+.pfn-movement-table th, .pfn-movement-table td { padding: 13px; border-bottom: 1px solid var(--pfn-line); vertical-align: top; }
+.pfn-movement-table td { min-width: 140px; max-width: 300px; overflow-wrap: anywhere; line-height: 1.5; }
+.pfn-movement-table tbody tr:last-child td { border-bottom: 0; }
+.pfn-movement-table small, .pfn-movement-details small { display: block; color: var(--pfn-muted); margin-top: 5px; }
+.pfn-movement-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+.pfn-movement-card { padding: 17px; border: 1px solid var(--pfn-line); border-left: 4px solid #b77916; border-radius: 8px; overflow-wrap: anywhere; background: var(--pfn-card); }
+.pfn-movement-card.is-cancelled { border-left-color: #dc5263; }
+.pfn-movement-heading { display: flex; justify-content: space-between; gap: 12px; align-items: center; color: var(--pfn-muted); }
+.pfn-movement-heading time { font-size: 22px; color: var(--pfn-text); font-weight: 700; }
+.pfn-movement-card h3 { margin: 14px 0 6px; font-size: 15px; }
+.pfn-movement-card p { color: var(--pfn-muted); margin: 6px 0; }
+.pfn-movement-details { margin-top: 14px; padding-top: 10px; border-top: 1px solid var(--pfn-line); line-height: 1.5; white-space: pre-wrap; }
+.pfn-movement-details strong { display: block; margin-top: 5px; }
+.pfn-movement-pagination { display: flex; align-items: center; justify-content: flex-end; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+.pfn-movement-pagination > span { margin-right: auto; color: var(--pfn-muted); }
+@media (max-width: 640px) {
+  .pfn-tabs { gap: 18px; overflow-x: auto; }
+  .pfn-tabs button { flex-shrink: 0; }
+  .pfn-movement-cards { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* Painel semanal da agenda profissional. */
+.pfn-week-toolbar { display: flex; flex-wrap: wrap; gap: 12px; align-items: end; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid var(--pfn-line); }
+.pfn-week-prof { flex: 1 1 230px; max-width: 360px; }
+.pfn-week-navigation { display: flex; align-items: center; gap: 6px; }
+.pfn-week-navigation button[aria-label] { font-size: 24px; line-height: 1; min-width: 40px; padding: 6px 10px; }
+.pfn-week-loading { color: var(--pfn-muted); }
+.pfn-week-legend { display: flex; gap: 18px; flex-wrap: wrap; margin: 0 0 14px; font-size: 11px; color: var(--pfn-muted); }
+.pfn-week-legend span:first-child { color: #16834c; }
+.pfn-week-legend span:nth-child(2) { color: #d04858; }
+.pfn-dark .pfn-week-legend span:first-child { color: #75d7a1; }
+.pfn-dark .pfn-week-legend span:nth-child(2) { color: #ff98a6; }
+.pfn-week-scroll { max-height: 72vh; overflow: auto; border: 1px solid var(--pfn-line); border-radius: 9px; position: relative; }
+.pfn-week-table { border-collapse: separate; border-spacing: 0; width: 100%; min-width: 800px; table-layout: fixed; font-size: 12px; }
+.pfn-week-table caption { text-align: left; }
+.pfn-week-table th, .pfn-week-table td { border-right: 1px solid var(--pfn-line); border-bottom: 1px solid var(--pfn-line); }
+.pfn-week-table tr > :last-child { border-right: 0; }
+.pfn-week-table tbody tr:last-child > * { border-bottom: 0; }
+.pfn-week-table thead th { position: sticky; top: 0; z-index: 2; background: var(--pfn-card); text-align: left; padding: 13px 12px; height: 76px; color: var(--pfn-muted); }
+.pfn-week-table thead th strong { display: block; font-size: 22px; color: var(--pfn-text); margin-top: 4px; }
+.pfn-week-table thead th small { display: inline-block; color: var(--pfn-blue); margin-top: 3px; }
+.pfn-week-table thead th.is-today { background: var(--pfn-tint); box-shadow: inset 0 3px var(--pfn-blue); }
+.pfn-week-table .pfn-week-hour { width: 72px; text-align: center; position: sticky; left: 0; background: var(--pfn-card); z-index: 1; font-size: 11px; color: var(--pfn-muted); }
+.pfn-week-table thead .pfn-week-hour { z-index: 3; }
+.pfn-week-cell { vertical-align: top; padding: 4px; height: 62px; overflow-wrap: anywhere; }
+.pfn-week-cell.is-today { box-shadow: inset 1px 0 var(--pfn-blue); }
+.pfn-week-livre { background: #f3fbf6; }
+.pfn-dark .pfn-week-livre { background: #102b24; }
+.pfn-week-ocupado { background: #fff4f5; }
+.pfn-dark .pfn-week-ocupado { background: #34202b; }
+.pfn-week-bloqueado, .pfn-week-sem_grade { background: var(--pfn-soft); }
+.pfn-agenda .pfn-week-free { border: 0; background: transparent; width: 100%; height: 100%; min-height: 52px; text-align: left; font-weight: 400; color: #187347; padding: 7px 8px; }
+.pfn-dark .pfn-week-free { color: #8adbb0; }
+.pfn-week-free small { display: block; margin-top: 5px; font-size: 10px; }
+.pfn-agenda .pfn-week-appointment { width: 100%; min-height: 70px; height: 100%; text-align: left; padding: 9px; border: 1px solid #edbdc5; background: #ffe9ed; color: #682b38; display: flex; flex-direction: column; gap: 5px; }
+.pfn-dark .pfn-week-appointment { background: #482732; border-color: #774451; color: #ffdee5; }
+.pfn-week-appointment strong { font-size: 12px; font-weight: 650; }
+.pfn-week-appointment small, .pfn-week-appointment span { font-size: 10px; font-weight: 400; }
+.pfn-week-appointment b { font-size: 10px; }
+.pfn-agenda .pfn-week-appointment.is-selected { outline: 2px solid var(--pfn-blue); outline-offset: -2px; }
+.pfn-week-appointment.is-next { box-shadow: inset 4px 0 #c58500; }
+.pfn-week-unavailable { display: block; color: var(--pfn-muted); font-size: 11px; padding: 12px 6px; }
+.pfn-week-outside { margin-top: 22px; }
+.pfn-week-outside > div { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+.pfn-sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+@media (max-width: 640px) {
+  .pfn-week-toolbar { gap: 10px; }
+  .pfn-week-prof { flex-basis: 100%; max-width: none; }
+  .pfn-week-table { min-width: 760px; }
+  .pfn-week-scroll { max-height: 70vh; }
+}

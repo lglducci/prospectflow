@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useMemo } from "react";
 import { criarAgendaApi } from "./agendaApi";
-import { pfLocal, pfSemana, pfRequisicao } from "./agendaUtils";
+import { pfLocal, pfSemana, pfRequisicao, pfHistorico } from "./agendaUtils";
 export default function useAgenda(empresaId) {
   const [aba, setAba] = useState("HOJE");
   const [profissionais, setProfissionais] = useState([]),
@@ -473,7 +473,7 @@ export default function useAgenda(empresaId) {
     ),
   );
   const fora = (consulta.dados?.agendamentos || []).filter(
-    (t) => !visiveis.has(String(t.id)),
+    (t) => !pfHistorico(t) && !visiveis.has(String(t.id)),
   );
   const livres = (horarios.dados?.dias || [])
     .flatMap((d) => d.horarios || [])

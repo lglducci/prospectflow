@@ -20,7 +20,7 @@ export default function AgendaHoje({ ativo }) {
     setSelecionado,
     setAviso,
   } = useAgendaContext();
-  const [visao, setVisao] = useState("LISTA");
+  const [visao, setVisao] = useState("PAINEL");
   const subTabs = useRef([]);
   const [profissional, setProfissional] = useState("");
   const [agora, setAgora] = useState(() => new Date());

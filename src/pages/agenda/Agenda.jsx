@@ -1,12 +1,14 @@
-import { useRef } from "react";
+import { useState } from "react";
 import { useAuth } from "../../auth/AuthContext";
 import { useTheme } from "../../lib/theme";
 import useAgenda from "./useAgenda";
 import { AgendaContext } from "./AgendaContext";
-import AgendaHoje from "./AgendaHoje";
+import AgendaSemanal from "./AgendaSemanal";
 import AgendaPeriodo from "./AgendaPeriodo";
 import NovoAgendamento from "./NovoAgendamento";
 import AgendaAcoes from "./AgendaAcoes";
+import AgendaAbas from "./AgendaAbas";
+import AgendaMovimentacoes from "./AgendaMovimentacoes";
 import "./Agenda.css";
 export default function Agenda() {
   const { session } = useAuth();
@@ -20,7 +22,7 @@ export default function Agenda() {
 function AgendaEmpresa({ empresaId }) {
   const { dark } = useTheme();
   const agenda = useAgenda(empresaId);
-  const tabsRef = useRef([]);
+  const [visaoAgenda, setVisaoAgenda] = useState("HOJE");
   const {
     aba,
     setAba,
@@ -32,13 +34,25 @@ function AgendaEmpresa({ empresaId }) {
     aviso,
     setSelecionado,
   } = agenda;
+  const principal = ["HOJE", "AGENDA"].includes(aba) ? "PROFISSIONAL" : aba;
   const abas = [
-    { id: "HOJE", nome: "Hoje", tab: "pfn-tab-hoje", panel: "pfn-panel-hoje" },
     {
-      id: "AGENDA",
-      nome: "Agendamentos",
-      tab: "pfn-tab-0",
-      panel: "pfn-panel-0",
+      id: "PROFISSIONAL",
+      nome: "Agenda profissional",
+      tab: "pfn-tab-profissional",
+      panel: "pfn-panel-profissional",
+    },
+    {
+      id: "REMARCACOES",
+      nome: "Remarcações",
+      tab: "pfn-tab-remarcacoes",
+      panel: "pfn-panel-remarcacoes",
+    },
+    {
+      id: "CANCELAMENTOS",
+      nome: "Cancelamentos",
+      tab: "pfn-tab-cancelamentos",
+      panel: "pfn-panel-cancelamentos",
     },
     {
       id: "NOVO",
@@ -50,19 +64,7 @@ function AgendaEmpresa({ empresaId }) {
   function escolher(id) {
     setSelecionado(null);
     if (id === "NOVO") abrirNovo();
-    else setAba(id);
-  }
-  function teclado(e, index) {
-    let next;
-    if (e.key === "ArrowRight") next = (index + 1) % abas.length;
-    else if (e.key === "ArrowLeft")
-      next = (index + abas.length - 1) % abas.length;
-    else if (e.key === "Home") next = 0;
-    else if (e.key === "End") next = abas.length - 1;
-    else return;
-    e.preventDefault();
-    escolher(abas[next].id);
-    tabsRef.current[next]?.focus();
+    else setAba(id === "PROFISSIONAL" ? visaoAgenda : id);
   }
   return (
     <AgendaContext.Provider value={{ ...agenda, empresaId }}>
@@ -78,26 +80,13 @@ function AgendaEmpresa({ empresaId }) {
           <span className="pfn-company">Sessão da empresa #{empresaId}</span>
         </header>
         <div className="pfn-shell">
-          <nav className="pfn-tabs" role="tablist" aria-label="Agenda">
-            {abas.map((a, i) => (
-              <button
-                key={a.id}
-                type="button"
-                role="tab"
-                id={a.tab}
-                aria-controls={a.panel}
-                aria-selected={aba === a.id}
-                tabIndex={aba === a.id ? 0 : -1}
-                ref={(el) => {
-                  tabsRef.current[i] = el;
-                }}
-                onClick={() => escolher(a.id)}
-                onKeyDown={(e) => teclado(e, i)}
-              >
-                {a.nome}
-              </button>
-            ))}
-          </nav>
+          <AgendaAbas
+            itens={abas}
+            valor={principal}
+            onChange={escolher}
+            rotulo="Agenda"
+            className="pfn-tabs"
+          />
           {aviso && (
             <p className="pfn-success" role="status">
               {aviso}
@@ -114,14 +103,55 @@ function AgendaEmpresa({ empresaId }) {
                 Tentar novamente
               </button>
             </div>
-          ) : !profissionais.length ? (
+          ) : !profissionais.length &&
+            !["REMARCACOES", "CANCELAMENTOS"].includes(aba) ? (
             <p className="pfn-state">
               Nenhum profissional ativo cadastrado nesta empresa.
             </p>
           ) : (
             <>
-              <AgendaHoje ativo={aba === "HOJE"} />
-              <AgendaPeriodo />
+              <div
+                role="tabpanel"
+                id="pfn-panel-profissional"
+                aria-labelledby="pfn-tab-profissional"
+                hidden={principal !== "PROFISSIONAL"}
+              >
+                <div className="pfn-professional-subtabs">
+                  <AgendaAbas
+                    rotulo="Agenda profissional"
+                    valor={aba}
+                    itens={[
+                      {
+                        id: "AGENDA",
+                        nome: "Por período",
+                        tab: "pfn-tab-0",
+                        panel: "pfn-panel-0",
+                      },
+                      {
+                        id: "HOJE",
+                        nome: "Painel semanal",
+                        tab: "pfn-tab-hoje",
+                        panel: "pfn-panel-hoje",
+                      },
+                    ]}
+                    onChange={(id) => {
+                      setSelecionado(null);
+                      setVisaoAgenda(id);
+                      setAba(id);
+                    }}
+                  />
+                </div>
+                <AgendaSemanal ativo={aba === "HOJE"} />
+                <AgendaPeriodo />
+              </div>
+              <AgendaMovimentacoes
+                tipo="REMARCADO"
+                ativo={aba === "REMARCACOES"}
+              />
+              <AgendaMovimentacoes
+                tipo="CANCELADO"
+                ativo={aba === "CANCELAMENTOS"}
+              />
               <NovoAgendamento />
             </>
           )}

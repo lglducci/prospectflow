@@ -30,7 +30,7 @@ export function pfLocal(value = new Date()) {
   const p = (key) => parts.find((item) => item.type === key)?.value;
   return `${p("year")}-${p("month")}-${p("day")}T${p("hour")}:${p("minute")}`;
 }
- 
+
 export function pfSemana() {
   const inicio = pfLocal().slice(0, 10);
   const d = new Date(inicio + "T12:00:00Z");
@@ -49,8 +49,24 @@ export function pfDia(s) {
     .reverse()
     .join("/");
 }
+export function pfHistorico(t) {
+  return (
+    ["CANCELADA", "CANCELADO", "REMARCADO"].includes(
+      String(t.status).toUpperCase(),
+    ) ||
+    ["CANCELADO", "REMARCADO"].includes(
+      String(t.situacao_atendimento).toUpperCase(),
+    )
+  );
+}
 export function pfSituacao(t) {
-  if (t.status === "CANCELADA") return "CANCELADO";
+  if (t.status === "REMARCADO" || t.situacao_atendimento === "REMARCADO")
+    return "REMARCADO";
+  if (
+    ["CANCELADA", "CANCELADO"].includes(t.status) ||
+    t.situacao_atendimento === "CANCELADO"
+  )
+    return "CANCELADO";
   if (t.status === "CONCLUIDA")
     return t.situacao_atendimento === "FALTOU" ? "FALTOU" : "CONCLUIDO";
   return ["CONFIRMADO", "CHEGOU"].includes(t.situacao_atendimento)
@@ -65,10 +81,11 @@ export function pfRotulo(t) {
     CONCLUIDO: "Concluído",
     FALTOU: "Faltou",
     CANCELADO: "Cancelado",
+    REMARCADO: "Remarcado",
   }[pfSituacao(t)];
 }
 export function pfPode(t, acao) {
-  if (!t) return false;
+  if (!t || pfHistorico(t)) return false;
   const s = pfSituacao(t);
   if (acao === "REMARCAR")
     return ["AGENDADO", "CONFIRMADO", "FALTOU"].includes(s);
@@ -154,7 +171,7 @@ export function pfItensHoje(resposta, hoje, profissional) {
     ),
   ];
   for (const t of todos) {
-    if (t.id == null || t.status === "CANCELADA") continue;
+    if (t.id == null || pfHistorico(t)) continue;
     if (
       t.profissional_id != null &&
       String(t.profissional_id) !== String(profissional.id)
@@ -175,7 +192,8 @@ export function pfItensHoje(resposta, hoje, profissional) {
 }
 export function pfDestaqueHoje(t, agora = new Date()) {
   const s = pfSituacao(t);
-  if (["CHEGOU", "CONCLUIDO", "FALTOU", "CANCELADO"].includes(s)) return s;
+  if (["CHEGOU", "CONCLUIDO", "FALTOU", "CANCELADO", "REMARCADO"].includes(s))
+    return s;
   const minutos =
     (new Date(t.agendada_para || t.inicio).getTime() -
       new Date(agora).getTime()) /
