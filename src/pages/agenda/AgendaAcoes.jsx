@@ -64,7 +64,9 @@ export default function AgendaAcoes() {
     erroAcao,
     nomeProf,
     executarAcao,
-    retornoHorarios, mudarRetorno, consultarRetorno,
+    retornoHorarios,
+    mudarRetorno,
+    consultarRetorno,
   } = useAgendaContext();
   const dialogRef = useRef(null);
   useEffect(() => {
@@ -109,38 +111,134 @@ export default function AgendaAcoes() {
                   Nova data e horário
                   <input
                     type="datetime-local"
+                    step="1800"
+                    title="Escolha um horário com minutos 00 ou 30, como 17:00 ou 17:30."
                     required
                     value={modal.data}
-                    onChange={(e) =>
-                      setModal((m) => ({ ...m, data: e.target.value }))
-                    }
+                    onInvalid={(e) => {
+                      if (e.currentTarget.validity.stepMismatch) {
+                        e.currentTarget.setCustomValidity(
+                          "Escolha um horário em intervalos de 30 minutos, como 17:00 ou 17:30.",
+                        );
+                      }
+                    }}
+                    onChange={(e) => {
+                      e.currentTarget.setCustomValidity("");
+                      setModal((m) => ({ ...m, data: e.target.value }));
+                    }}
                   />
                 </label>
                 <small>
-                  O servidor confere a disponibilidade antes de remarcar.
+                  Use minutos 00 ou 30, como 17:00 ou 17:30. O servidor confere
+                  a disponibilidade antes de remarcar.
                 </small>
               </>
             )}
-            {modal.acao === 'CONCLUIR' && (
+            {modal.acao === "CONCLUIR" && (
               <div className="pfn-return">
-                <label>Agendar retorno?
-                  <select value={modal.agendarRetorno?'sim':'nao'} onChange={e=>mudarRetorno('agendarRetorno',e.target.value==='sim')}>
-                    <option value="nao">Não</option><option value="sim">Sim</option>
+                <label>
+                  Agendar retorno?
+                  <select
+                    value={modal.agendarRetorno ? "sim" : "nao"}
+                    onChange={(e) =>
+                      mudarRetorno("agendarRetorno", e.target.value === "sim")
+                    }
+                  >
+                    <option value="nao">Não</option>
+                    <option value="sim">Sim</option>
                   </select>
                 </label>
-                {modal.agendarRetorno && <>
-                  <label>Cliente<input readOnly value={selecionado?.lead_nome||selecionado?.empresa_nome||'Contato'}/></label>
-                  <label>Profissional<input readOnly value={nomeProf(String(selecionado?.profissional_id??profissional))}/></label>
-                  <label>Data do retorno<input type="date" required value={modal.retornoDia} onChange={e=>mudarRetorno('retornoDia',e.target.value)}/></label>
-                  <button type="button" onClick={consultarRetorno} disabled={retornoHorarios.carregando}>{retornoHorarios.carregando?'Consultando…':'Ver horários livres'}</button>
-                  <label>Horário do retorno<select required disabled={retornoHorarios.carregando||!retornoHorarios.itens.length} value={modal.retornoHorario} onChange={e=>setModal(m=>({...m,retornoHorario:e.target.value}))}>
-                    <option value="">Selecione um horário livre</option>
-                    {retornoHorarios.itens.map(h=><option key={h.local} value={h.local}>{h.hora}</option>)}
-                  </select></label>
-                  {retornoHorarios.erro&&<p role="status" className="pfn-message">{retornoHorarios.erro}</p>}
-                  <label>Observação do retorno (opcional)<textarea rows={3} maxLength={4000} value={modal.retornoDescricao} onChange={e=>setModal(m=>({...m,retornoDescricao:e.target.value}))}/></label>
-                  <small>A disponibilidade será validada novamente ao salvar. Se o retorno falhar, o atendimento não será concluído.</small>
-                </>}
+                {modal.agendarRetorno && (
+                  <>
+                    <label>
+                      Cliente
+                      <input
+                        readOnly
+                        value={
+                          selecionado?.lead_nome ||
+                          selecionado?.empresa_nome ||
+                          "Contato"
+                        }
+                      />
+                    </label>
+                    <label>
+                      Profissional
+                      <input
+                        readOnly
+                        value={nomeProf(
+                          String(selecionado?.profissional_id ?? profissional),
+                        )}
+                      />
+                    </label>
+                    <label>
+                      Data do retorno
+                      <input
+                        type="date"
+                        required
+                        value={modal.retornoDia}
+                        onChange={(e) =>
+                          mudarRetorno("retornoDia", e.target.value)
+                        }
+                      />
+                    </label>
+                    <button
+                      type="button"
+                      onClick={consultarRetorno}
+                      disabled={retornoHorarios.carregando}
+                    >
+                      {retornoHorarios.carregando
+                        ? "Consultando…"
+                        : "Ver horários livres"}
+                    </button>
+                    <label>
+                      Horário do retorno
+                      <select
+                        required
+                        disabled={
+                          retornoHorarios.carregando ||
+                          !retornoHorarios.itens.length
+                        }
+                        value={modal.retornoHorario}
+                        onChange={(e) =>
+                          setModal((m) => ({
+                            ...m,
+                            retornoHorario: e.target.value,
+                          }))
+                        }
+                      >
+                        <option value="">Selecione um horário livre</option>
+                        {retornoHorarios.itens.map((h) => (
+                          <option key={h.local} value={h.local}>
+                            {h.hora}
+                          </option>
+                        ))}
+                      </select>
+                    </label>
+                    {retornoHorarios.erro && (
+                      <p role="status" className="pfn-message">
+                        {retornoHorarios.erro}
+                      </p>
+                    )}
+                    <label>
+                      Observação do retorno (opcional)
+                      <textarea
+                        rows={3}
+                        maxLength={4000}
+                        value={modal.retornoDescricao}
+                        onChange={(e) =>
+                          setModal((m) => ({
+                            ...m,
+                            retornoDescricao: e.target.value,
+                          }))
+                        }
+                      />
+                    </label>
+                    <small>
+                      A disponibilidade será validada novamente ao salvar. Se o
+                      retorno falhar, o atendimento não será concluído.
+                    </small>
+                  </>
+                )}
               </div>
             )}
             {["REMARCAR", "CANCELAR", "FALTOU"].includes(modal.acao) && (

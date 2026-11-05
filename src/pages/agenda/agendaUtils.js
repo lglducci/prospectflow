@@ -99,6 +99,79 @@ export function pfPode(t, acao) {
     );
   return ["REMARCAR", "CONCLUIR", "CANCELAR"].includes(acao);
 }
+export function pfErroHorarioAgenda(valor) {
+  const local = String(valor ?? "");
+  if (!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(local))
+    return "Escolha uma data e horário válidos.";
+  const data = local.slice(0, 10);
+  const d = new Date(data + "T12:00:00Z");
+  if (
+    !Number.isFinite(d.getTime()) ||
+    d.toISOString().slice(0, 10) !== data ||
+    Number(local.slice(11, 13)) > 23
+  )
+    return "Escolha uma data e horário válidos.";
+  if (!["00", "30"].includes(local.slice(14, 16)))
+    return "Escolha um horário em intervalos de 30 minutos, como 17:00 ou 17:30.";
+  return "";
+}
+
+export function pfMensagemErroAgenda(
+  valor,
+  fallback = "Não foi possível concluir a operação. Atualize a agenda e tente novamente.",
+) {
+  const visitados = new Set();
+  function ler(v, nivel = 0) {
+    if (v == null || nivel > 10) return "";
+    if (typeof v === "string") {
+      const texto = v.trim();
+      if (
+        !texto ||
+        /\[object [^\]]+\]/.test(texto) ||
+        /^(NodeOperationError|NodeApiError|Error)$/.test(texto)
+      )
+        return "";
+      if (/^[{["]/.test(texto)) {
+        try {
+          return ler(JSON.parse(texto), nivel + 1);
+        } catch {
+          /* Mensagem de texto comum. */
+        }
+      }
+      return texto;
+    }
+    if (typeof v !== "object" || visitados.has(v)) return "";
+    visitados.add(v);
+    if (Array.isArray(v)) {
+      for (const item of v) {
+        const texto = ler(item, nivel + 1);
+        if (texto) return texto;
+      }
+      return "";
+    }
+    for (const campo of [
+      "erro",
+      "mensagem",
+      "description",
+      "detail",
+      "message",
+      "error",
+      "cause",
+      "messages",
+      "errorDetails",
+      "resultado",
+      "resposta",
+      "body",
+      "data",
+    ]) {
+      const texto = ler(v[campo], nivel + 1);
+      if (texto) return texto;
+    }
+    return "";
+  }
+  return ler(valor) || fallback;
+}
+
 export function pfResposta(valor, empresa, depth = 0) {
   if (depth > 10 || valor == null)
     throw Error("O servidor não retornou os dados esperados.");
@@ -113,17 +186,13 @@ export function pfResposta(valor, empresa, depth = 0) {
   }
   if (Array.isArray(valor)) return pfResposta(valor[0], empresa, depth + 1);
   if (typeof valor !== "object") throw Error("Resposta inválida da agenda.");
-  if (valor.ok === false || valor.error || valor.erro)
-    throw Error(
-      String(
-        valor.erro ||
-          valor.mensagem ||
-          valor.message ||
-          valor.error?.message ||
-          valor.error ||
-          "Não foi possível concluir a operação.",
-      ),
-    );
+  if (
+    valor.ok === false ||
+    valor.error ||
+    valor.erro ||
+    ["NodeOperationError", "NodeApiError"].includes(valor.name)
+  )
+    throw Error(pfMensagemErroAgenda(valor));
   if (valor.empresa_id != null && String(valor.empresa_id) !== String(empresa))
     throw Error("A resposta pertence a outra empresa. Entre novamente.");
   if (

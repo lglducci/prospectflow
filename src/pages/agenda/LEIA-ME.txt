@@ -1,0 +1,63 @@
+BUSCA PROGRESSIVA DE CLIENTES NA AGENDA
+
+O campo Buscar cliente aceita nome, sobrenome ou parte do telefone.
+A lista aparece em cartões com iniciais, nome, telefone e ID. Ela reduz os
+resultados conforme você digita. Setas e Enter também selecionam um cliente.
+A busca não diferencia maiúsculas/minúsculas ou acentos. Um zero inicial
+antes do DDD é aceito na busca parcial de telefone. Não há correção automática
+de nomes digitados com letras trocadas.
+
+INSTALAÇÃO, NESTA ORDEM
+
+1. BANCO: execute inteiro sql/01-instalar-busca-contatos.sql.
+   Ele cria a função de leitura prospect.fn_agenda_buscar_contatos.
+   Não altera tabelas, cadastros nem a função de salvar agendamentos.
+
+2. N8N, webhook prospectflow-agenda:
+   No nó PostgreSQL Executar agenda com sessão1, substitua a consulta inteira
+   pelo conteúdo de n8n/02-Consulta-postgres-agenda.sql.
+   Mantenha os parâmetros na ordem atual:
+   ={{ [$json.cookie_token, $json.csrf_token, $json.acao, JSON.stringify($json.payload)] }}
+   Esse SQL é a consulta do nó, não é para executar no editor SQL do banco.
+
+3. NO MESMO FLUXO:
+   No nó Code Validar solicitação1, substitua TODO o código pelo conteúdo de
+   n8n/03-Validar-solicitacao.js. Mantenha Run Once for All Items.
+   Ele libera BUSCAR_CONTATOS_AGENDA e aceita lead_id no salvamento.
+   A empresa continua vindo da sessão, e não do navegador.
+   Salve/publique o fluxo após atualizar os dois nós.
+
+4. TELA:
+   Copie para a pasta da agenda estes arquivos:
+   - BuscaContatoAgenda.jsx (novo)
+   - NovoAgendamento.jsx
+   - useAgenda.js
+   - Agenda.css
+   Faça o build/publicação habitual. Os demais arquivos da tela foram
+   preservados da entrega anterior, incluindo a correção dos horários e do
+   erro [object Object].
+
+COMO USAR
+
+- Digite ao menos 2 letras para nome/sobrenome ou 3 números para telefone.
+- A pesquisa começa após uma pausa de 300 ms na digitação.
+- Cada consulta traz 20 registros. Carregar mais busca a próxima página.
+- Clique no cliente ou use as setas e Enter. O agendamento usa o ID desse
+  cadastro, inclusive quando duas pessoas compartilham o mesmo telefone.
+- Para trocar a pessoa, clique em Trocar cliente ou digite uma nova busca.
+- Novo cliente mantém o cadastro por telefone. Usar este telefone verifica
+  se ele já existe; se não existir, informe o nome nos detalhes antes de salvar.
+- Clientes sem telefone podem ser selecionados pelo cadastro; isso não cria
+  telefone nem muda as regras de elegibilidade dos lembretes existentes.
+
+VALIDAÇÃO
+
+Testes com dados fictícios em PostgreSQL local (PGlite): nome/sobrenome,
+acentos, telefone parcial, paginação, IDs grandes, empresa da sessão e
+salvamento por ID entre contatos com o mesmo telefone. Não houve mudança na
+função de salvar tarefas existente.
+
+Testes em DOM simulado: digitação progressiva, atraso de resposta, seleção
+por mouse/teclado, paginação, vazio/erro, confirmação do cadastro escolhido,
+limpeza após salvar, cadastro novo e regressão da agenda semanal compacta.
+Confira a aparência e o funcionamento no seu navegador após instalar.

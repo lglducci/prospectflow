@@ -1,7 +1,13 @@
 import { useEffect, useMemo, useState } from "react";
 import { useAgendaContext } from "./AgendaContext";
 import { AgendaBarraAcoes } from "./AgendaAcoes";
-import { pfLocal, pfDia, pfRotulo, pfDestaqueHoje } from "./agendaUtils";
+import {
+  pfLocal,
+  pfDia,
+  pfRotulo,
+  pfDestaqueHoje,
+  pfBlocos,
+} from "./agendaUtils";
 import {
   pfSomarDias,
   pfSemanaProfissional,
@@ -126,6 +132,34 @@ export default function AgendaSemanal({ ativo }) {
     () => montarSemanaProfissional(dados, semana, profissional),
     [dados, semana, profissional],
   );
+  const diasCompactos = useMemo(
+    () =>
+      semana.dias.map((data, coluna) => {
+        const celulas = painel.linhas.map((linha) => linha.celulas[coluna]);
+        const horarios = celulas.flatMap((c, index) => {
+          if (!c.slot || c.oculta) return [];
+          const fim = celulas[index + c.rowSpan - 1]?.slot?.fim || c.slot.fim;
+          return [
+            {
+              ...c.slot,
+              inicio: new Date(c.slot.inicio).toISOString(),
+              fim: new Date(fim).toISOString(),
+              hora_inicio: pfLocal(c.slot.inicio).slice(11, 16),
+              hora_fim: pfLocal(fim).slice(11, 16),
+              situacao: c.estado,
+              agendamentos: c.itens,
+            },
+          ];
+        });
+        return {
+          data,
+          livres: celulas.filter((c) => c.estado === "LIVRE").length,
+          ocupados: celulas.filter((c) => c.estado === "OCUPADO").length,
+          blocos: pfBlocos(horarios),
+        };
+      }),
+    [painel, semana],
+  );
   const selecionadoAqui =
     selecionado?._origem === "SEMANA" &&
     painel.itens.some(
@@ -160,20 +194,26 @@ export default function AgendaSemanal({ ativo }) {
         key={t.id}
         disabled={carregando}
         aria-pressed={Boolean(selecionadoAtual)}
+        aria-label={`${t.lead_nome || t.empresa_nome || "Contato não informado"}, ${local.slice(11, 16)}, ${pfRotulo(t)}`}
         className={`pfn-week-appointment ${selecionadoAtual ? "is-selected" : ""} ${destaque === "PROXIMO" ? "is-next" : ""}`}
         onClick={() => escolher(t)}
       >
-        <small>
-          {fora ? `${pfDia(local.slice(0, 10))} · ` : ""}
-          {local.slice(11, 16)}
-          {t.fim ? ` - ${pfLocal(t.fim).slice(11, 16)}` : ""}
-        </small>
+        {(selecionadoAtual || fora) && (
+          <small>
+            {fora ? `${pfDia(local.slice(0, 10))} · ` : ""}
+            {local.slice(11, 16)}
+            {t.fim ? ` - ${pfLocal(t.fim).slice(11, 16)}` : ""}
+          </small>
+        )}
         <strong>
+          <span aria-hidden="true">{selecionadoAtual ? "▾ " : "▸ "}</span>
           {t.lead_nome || t.empresa_nome || "Contato não informado"}
         </strong>
-        <span>
-          {pfRotulo(t)} · #{t.id}
-        </span>
+        {selecionadoAtual && (
+          <span>
+            {pfRotulo(t)} · #{t.id}
+          </span>
+        )}
         {destaque === "PROXIMO" && <b>Em até 30 min</b>}
         {destaque === "ATRASADO" && <b>Atrasado</b>}
       </button>
@@ -305,89 +345,102 @@ export default function AgendaSemanal({ ativo }) {
             </p>
           ) : (
             <div
-              className="pfn-week-scroll"
+              className="pfn-week-scroll pfn-week-compact-scroll"
               role="region"
               aria-label="Grade semanal de horários"
               tabIndex={0}
               aria-busy={carregando}
             >
-              <table className="pfn-week-table">
-                <caption className="pfn-sr-only">
-                  Agenda de {prof?.nome}, de {pfDia(semana.inicio)} a{" "}
-                  {pfDia(semana.fim)}
-                </caption>
-                <thead>
-                  <tr>
-                    <th scope="col" className="pfn-week-hour">
-                      Horário
-                    </th>
-                    {semana.dias.map((data, i) => (
-                      <th
-                        key={data}
-                        scope="col"
-                        className={data === hoje ? "is-today" : ""}
-                        aria-current={data === hoje ? "date" : undefined}
-                      >
-                        <span>
-                          {["Segunda", "Terça", "Quarta", "Quinta", "Sexta"][i]}
-                        </span>
-                        <strong>{pfDia(data).slice(0, 5)}</strong>
-                        {data === hoje && <small>Hoje</small>}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {painel.linhas.map((linha) => (
-                    <tr key={linha.hora}>
-                      <th scope="row" className="pfn-week-hour">
-                        {linha.hora}
-                      </th>
-                      {linha.celulas.map((c) =>
-                        c.oculta ? null : (
-                          <td
-                            key={c.data}
-                            rowSpan={c.rowSpan}
-                            className={`pfn-week-cell pfn-week-${c.estado.toLowerCase()} ${c.data === hoje ? "is-today" : ""}`}
-                          >
-                            {c.itens.length ? (
-                              c.itens.map((t) => compromisso(t))
-                            ) : c.estado === "LIVRE" ? (
-                              <button
-                                type="button"
-                                className="pfn-week-free"
-                                disabled={
-                                  carregando ||
-                                  Date.parse(c.slot.inicio) <= agora.getTime()
-                                }
-                                aria-label={`Agendar ${prof?.nome}, ${pfDia(c.data)} às ${linha.hora}`}
-                                onClick={() => abrirNovo(c.slot, profissional)}
-                              >
-                                <span>Livre</span>
-                                <small>
-                                  {Date.parse(c.slot.inicio) <= agora.getTime()
-                                    ? "Horário passado"
-                                    : "+ Agendar"}
-                                </small>
-                              </button>
-                            ) : (
-                              <span className="pfn-week-unavailable">
-                                {c.estado === "OCUPADO"
-                                  ? "Ocupado · detalhes indisponíveis"
-                                  : c.estado === "SEM_GRADE"
+              <div className="pfn-week-compact-board">
+                {diasCompactos.map((dia, index) => (
+                  <details
+                    key={`${chave}:${dia.data}`}
+                    className={`pfn-day pfn-week-compact-day ${dia.data === hoje ? "is-today" : ""}`}
+                  >
+                    <summary
+                      aria-label={`${["Segunda", "Terça", "Quarta", "Quinta", "Sexta"][index]}, ${pfDia(dia.data)}, ${dia.livres} livres, ${dia.ocupados} ocupados`}
+                      aria-current={dia.data === hoje ? "date" : undefined}
+                    >
+                      <strong>
+                        {["Seg.", "Ter.", "Qua.", "Qui.", "Sex."][index]},{" "}
+                        {pfDia(dia.data).slice(0, 5)}
+                        {dia.data === hoje ? " · Hoje" : ""}
+                      </strong>
+                      <small>
+                        {dia.livres} livres · {dia.ocupados} ocupados
+                      </small>
+                    </summary>
+                    <div className="pfn-slots">
+                      {!dia.blocos.length && (
+                        <p className="pfn-week-unavailable">
+                          Sem grade de horários.
+                        </p>
+                      )}
+                      {dia.blocos.map((h) => {
+                        const cabecalho = (
+                          <>
+                            <time>
+                              {h.hora_inicio}–{h.hora_fim}
+                            </time>
+                            <span>
+                              {h.situacao === "LIVRE"
+                                ? "Livre"
+                                : h.situacao === "OCUPADO"
+                                  ? "Ocupado"
+                                  : h.situacao === "SEM_GRADE"
                                     ? "Sem grade"
-                                    : c.slot?.motivo_bloqueio === "ALMOCO"
+                                    : h.motivo_bloqueio === "ALMOCO"
                                       ? "Almoço"
                                       : "Sem expediente"}
-                              </span>
-                            )}
-                          </td>
-                        ),
-                      )}
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+                            </span>
+                          </>
+                        );
+                        return h.situacao === "LIVRE" ? (
+                          <details
+                            key={h.inicio}
+                            className="pfn-slot pfn-livre pfn-free-options"
+                          >
+                            <summary
+                              className="pfn-slot-head"
+                              aria-label={`${h.hora_inicio} a ${h.hora_fim}, livre. Escolher horário para agendar.`}
+                            >
+                              {cabecalho}
+                            </summary>
+                            <div
+                              className="pfn-free-picker"
+                              role="group"
+                              aria-label={`Horários livres de ${pfDia(dia.data)}`}
+                            >
+                              {h.originais.map((slot) => (
+                                <button
+                                  type="button"
+                                  key={slot.inicio}
+                                  disabled={
+                                    carregando ||
+                                    Date.parse(slot.inicio) <= agora.getTime()
+                                  }
+                                  aria-label={`Agendar ${prof?.nome}, ${pfDia(dia.data)} às ${slot.hora_inicio}`}
+                                  onClick={() => abrirNovo(slot, profissional)}
+                                >
+                                  {slot.hora_inicio}
+                                </button>
+                              ))}
+                            </div>
+                          </details>
+                        ) : (
+                          <div
+                            key={h.inicio}
+                            className={`pfn-slot pfn-${String(h.situacao).toLowerCase()}`}
+                          >
+                            <div className="pfn-slot-head">{cabecalho}</div>
+                            {h.agendamentos.map((t) => compromisso(t))}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </details>
+                ))}
+              </div>
             </div>
           )}
           {painel.fora.length > 0 && (
@@ -400,9 +453,9 @@ export default function AgendaSemanal({ ativo }) {
       )}
       <p className="pfn-foot">
         Segunda a sexta. As setas mudam uma semana por vez e mantêm o
-        profissional selecionado. Clique em um atendimento para ver as ações ou
-        em um horário livre futuro para agendar. Atualização a cada minuto
-        enquanto esta aba estiver visível.
+        profissional selecionado. Abra um dia para ver as faixas; abra uma faixa
+        livre para escolher o horário. Clique no contato para ver as ações.
+        Atualização a cada minuto enquanto esta aba estiver visível.
       </p>
     </div>
   );

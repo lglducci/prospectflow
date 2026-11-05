@@ -1623,3 +1623,155 @@
   .pfn-week-table { min-width: 760px; }
   .pfn-week-scroll { max-height: 70vh; }
 }
+
+/* Painel semanal compacto: dias e faixas recolhidos ao abrir a semana. */
+.pfn-week-compact-scroll {
+  border: 0;
+  border-radius: 0;
+}
+.pfn-week-compact-board {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(150px, 1fr));
+  gap: 9px;
+  align-items: start;
+  min-width: 790px;
+  padding: 2px 2px 6px;
+}
+.pfn-week-compact-day {
+  min-width: 0;
+  background: var(--pfn-card);
+  border-radius: 6px;
+}
+.pfn-week-compact-day > summary {
+  padding: 12px 10px;
+  border-bottom: 0;
+}
+.pfn-week-compact-day[open] > summary {
+  border-bottom: 1px solid var(--pfn-line);
+}
+.pfn-week-compact-day > summary strong {
+  font-size: 11px;
+  line-height: 1.5;
+}
+.pfn-week-compact-day > summary small {
+  font-size: 9px;
+  line-height: 1.5;
+}
+.pfn-week-compact-day.is-today > summary {
+  box-shadow: inset 0 3px var(--pfn-blue);
+}
+.pfn-week-compact-day .pfn-slots {
+  gap: 6px;
+}
+.pfn-week-compact-day .pfn-slot {
+  padding: 8px 7px;
+  border-radius: 4px;
+}
+.pfn-week-compact-day .pfn-slot-head {
+  align-items: center;
+  font-size: 10px;
+  line-height: 1.5;
+}
+.pfn-week-compact-day .pfn-livre {
+  background: #e5ffd6;
+  border-color: #68c93d;
+  color: #2d6417;
+}
+.pfn-dark .pfn-week-compact-day .pfn-livre {
+  background: #24451b;
+  border-color: #65c936;
+  color: #c6ff9c;
+}
+.pfn-week-compact-day .pfn-livre .pfn-slot-head,
+.pfn-week-compact-day .pfn-livre .pfn-slot-head time {
+  color: inherit;
+}
+.pfn-week-compact-day .pfn-free-options > summary {
+  cursor: pointer;
+  list-style: none;
+}
+.pfn-week-compact-day .pfn-free-options > summary::-webkit-details-marker {
+  display: none;
+}
+.pfn-week-compact-day .pfn-free-options > summary span::after {
+  content: " ▾";
+  opacity: 0.65;
+}
+.pfn-week-compact-day .pfn-free-options[open] > summary span::after {
+  content: " ▴";
+}
+.pfn-week-compact-day .pfn-free-picker {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(48px, 1fr));
+  gap: 5px;
+  padding-top: 8px;
+  border-top: 1px solid var(--pfn-line);
+  margin-top: 8px;
+}
+.pfn-week-compact-day .pfn-free-picker button {
+  padding: 5px 3px;
+  font-size: 10px;
+}
+.pfn-week-compact-day .pfn-ocupado {
+  background: #ffe3e3;
+  border-color: #ed6666;
+  color: #b5222d;
+}
+.pfn-dark .pfn-week-compact-day .pfn-ocupado {
+  background: #4a2027;
+  color: #ffb8be;
+}
+.pfn-week-compact-day .pfn-ocupado .pfn-slot-head,
+.pfn-week-compact-day .pfn-ocupado .pfn-slot-head time {
+  color: inherit;
+}
+.pfn-week-compact-day .pfn-week-appointment {
+  height: auto;
+  min-height: 0;
+  padding: 4px 0;
+  margin-top: 6px;
+  border: 0;
+  border-radius: 3px;
+  background: transparent;
+  color: inherit;
+  box-shadow: none;
+}
+.pfn-week-compact-day .pfn-week-appointment strong {
+  font-size: 11px;
+}
+.pfn-week-compact-day .pfn-week-appointment.is-selected {
+  padding: 7px 5px;
+  background: var(--pfn-card);
+  color: var(--pfn-text);
+  outline: 1px solid var(--pfn-blue);
+}
+
+/* Busca progressiva de clientes em cartões, com navegação por teclado. */
+.pfn-contact-finder { background: var(--pfn-soft); border: 1px solid var(--pfn-line); border-radius: 9px; padding: 16px; margin: 20px 0 16px; }
+.pfn-contact-finder-top { display: flex; align-items: end; gap: 12px; }
+.pfn-contact-query { flex: 1; min-width: 0; }
+.pfn-contact-input-wrap { position: relative; }
+.pfn-contact-input-wrap input { width: 100%; padding-left: 37px; }
+.pfn-contact-search-icon { position: absolute; left: 13px; top: 8px; font-size: 22px; line-height: 1; color: var(--pfn-muted); pointer-events: none; }
+.pfn-contact-search-hint { font-size: 11px; color: var(--pfn-muted); line-height: 1.5; margin: 9px 0 0; }
+.pfn-contact-results-panel { margin-top: 12px; border: 1px solid var(--pfn-line); border-radius: 8px; overflow: hidden; background: var(--pfn-card); }
+.pfn-contact-results { max-height: 300px; overflow-y: auto; }
+.pfn-agenda .pfn-contact-option { display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; border: 0; border-bottom: 1px solid var(--pfn-line); border-radius: 0; background: var(--pfn-card); padding: 12px; font-weight: 400; }
+.pfn-agenda .pfn-contact-option:last-child { border-bottom: 0; }
+.pfn-agenda .pfn-contact-option.is-active, .pfn-agenda .pfn-contact-option:hover { background: var(--pfn-tint); }
+.pfn-contact-avatar { display: grid; place-items: center; width: 36px; height: 36px; flex-shrink: 0; border-radius: 10px; background: var(--pfn-soft); color: var(--pfn-blue); font-size: 12px; font-weight: 700; }
+.pfn-contact-option-text { display: grid; gap: 5px; flex: 1; min-width: 0; overflow-wrap: anywhere; }
+.pfn-contact-option-text strong { font-size: 12px; }
+.pfn-contact-option-text small { font-size: 11px; color: var(--pfn-muted); }
+.pfn-contact-option-id { font-size: 10px; color: var(--pfn-muted); }
+.pfn-contact-results-footer { display: flex; justify-content: space-between; gap: 12px; align-items: center; padding: 10px 12px; border-top: 1px solid var(--pfn-line); color: var(--pfn-muted); font-size: 11px; }
+.pfn-contact-result-state { padding: 12px; margin: 0; color: var(--pfn-muted); font-size: 12px; line-height: 1.5; }
+.pfn-contact-new-form { margin: 14px 0 0; padding: 0; border: 0; background: transparent; }
+.pfn-contact-new-form p { flex-basis: 100%; margin: 0; color: var(--pfn-muted); font-size: 11px; }
+@media (max-width: 640px) {
+ .pfn-contact-finder-top { flex-wrap: wrap; }
+ .pfn-contact-query { flex-basis: 100%; }
+ .pfn-contact-finder { padding: 12px; }
+}
+.pfn-contact-new-form > p { grid-column: 1 / -1; }
+.pfn-contact-results-panel > .pfn-message button { margin-left: 10px; }

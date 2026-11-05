@@ -1,3 +1,4 @@
+import BuscaContatoAgenda from "./BuscaContatoAgenda";
 import { useAgendaContext } from "./AgendaContext";
 import { pfTipos, pfLocal, pfDia } from "./agendaUtils";
 export default function NovoAgendamento() {
@@ -13,8 +14,6 @@ export default function NovoAgendamento() {
     nomeProf,
     setHorarios,
     mudarNovo,
-    mudarTelefone,
-    buscarContato,
     verHorarios,
     salvarNovo,
     livres,
@@ -33,22 +32,7 @@ export default function NovoAgendamento() {
           Busque o cliente, escolha o profissional e consulte os horários.
         </p>
         <fieldset disabled={salvando} className="pfn-new-fields">
-          <form className="pfn-booking-search" onSubmit={buscarContato}>
-            <label>
-              Telefone do cliente
-              <input
-                type="tel"
-                autoComplete="tel"
-                required
-                value={novo.telefone}
-                onChange={(e) => mudarTelefone(e.target.value)}
-                placeholder="DDD + telefone"
-              />
-            </label>
-            <button type="submit" disabled={contato.carregando}>
-              {contato.carregando ? "Buscando…" : "Buscar cliente"}
-            </button>
-          </form>
+          <BuscaContatoAgenda />
           {contato.erro && (
             <p className="pfn-message pfn-error" role="alert">
               {contato.erro}
@@ -82,7 +66,9 @@ export default function NovoAgendamento() {
                 )}
               </div>
               <span className="pfn-client-phone">
-                {contato.dados.lead?.telefone || novo.telefone}
+                {contato.dados.lead?.telefone ||
+                  novo.telefone ||
+                  "Telefone não informado"}
               </span>
             </section>
           )}
@@ -229,6 +215,7 @@ export default function NovoAgendamento() {
                       required
                       maxLength={250}
                       value={novo.nome}
+                      readOnly={Boolean(novo.lead_id)}
                       onChange={(e) => mudarNovo({ nome: e.target.value })}
                       placeholder="Nome do cliente"
                     />

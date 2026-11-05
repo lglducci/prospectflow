@@ -1,6 +1,12 @@
 import { useState, useEffect, useRef, useMemo } from "react";
 import { criarAgendaApi } from "./agendaApi";
-import { pfLocal, pfSemana, pfRequisicao, pfHistorico } from "./agendaUtils";
+import {
+  pfLocal,
+  pfSemana,
+  pfRequisicao,
+  pfHistorico,
+  pfErroHorarioAgenda,
+} from "./agendaUtils";
 export default function useAgenda(empresaId) {
   const [aba, setAba] = useState("HOJE");
   const [profissionais, setProfissionais] = useState([]),
@@ -24,6 +30,7 @@ export default function useAgenda(empresaId) {
     fixo: false,
     telefone: "",
     nome: "",
+    lead_id: "",
     dia: pfLocal().slice(0, 10),
     horario: "",
     tipo: "LIGAR",
@@ -164,10 +171,35 @@ export default function useAgenda(empresaId) {
     setNovo((n) => ({ ...n, ...patch }));
     setErroNovo("");
   }
+  function limparContato() {
+    contatoSeq.current++;
+    setContato({ dados: null, erro: "", carregando: false });
+    setNovo((n) => ({ ...n, lead_id: "", telefone: "", nome: "" }));
+    setErroNovo("");
+  }
+  function selecionarContato(lead) {
+    contatoSeq.current++;
+    const contatoEscolhido = { ...lead, id: String(lead.id) };
+    setContato({
+      dados: { encontrado: true, lead: contatoEscolhido },
+      erro: "",
+      carregando: false,
+    });
+    setNovo((n) => ({
+      ...n,
+      lead_id: contatoEscolhido.id,
+      telefone: contatoEscolhido.telefone || "",
+      nome:
+        contatoEscolhido.nome ||
+        contatoEscolhido.empresa_nome ||
+        "Contato sem nome",
+    }));
+    setErroNovo("");
+  }
   function mudarTelefone(value) {
     contatoSeq.current++;
     setContato({ dados: null, erro: "", carregando: false });
-    mudarNovo({ telefone: value, nome: "" });
+    mudarNovo({ telefone: value, nome: "", lead_id: "" });
   }
   async function buscarContato(e) {
     e?.preventDefault();
@@ -194,6 +226,7 @@ export default function useAgenda(empresaId) {
         setNovo((n) => ({
           ...n,
           nome: r.lead?.nome || r.lead?.empresa_nome || "",
+          lead_id: r.encontrado && r.lead?.id ? String(r.lead.id) : "",
         }));
       }
     } catch (err) {
@@ -241,7 +274,9 @@ export default function useAgenda(empresaId) {
     setErroNovo("");
     setAviso("");
     if (!contato.dados) {
-      setErroNovo("Busque o cliente pelo telefone antes de confirmar.");
+      setErroNovo(
+        "Busque e selecione o cliente ou informe o telefone para um novo cadastro.",
+      );
       return;
     }
     if (!novo.nome.trim() || !novo.horario || !novo.profissional_id) {
@@ -250,7 +285,20 @@ export default function useAgenda(empresaId) {
       );
       return;
     }
+    const erroHorario = pfErroHorarioAgenda(novo.horario);
+    if (erroHorario) {
+      setErroNovo(erroHorario);
+      return;
+    }
+    if (
+      contato.dados.encontrado &&
+      (!novo.lead_id || String(contato.dados.lead?.id) !== novo.lead_id)
+    ) {
+      setErroNovo("Selecione novamente o cliente antes de confirmar.");
+      return;
+    }
     const payload = pfRequisicao(saveRequest, {
+      ...(novo.lead_id ? { lead_id: novo.lead_id } : {}),
       telefone: novo.telefone,
       nome: novo.nome.trim(),
       profissional_id: novo.profissional_id,
@@ -275,6 +323,7 @@ export default function useAgenda(empresaId) {
         ...n,
         telefone: "",
         nome: "",
+        lead_id: "",
         horario: "",
         descricao: "",
       }));
@@ -396,6 +445,20 @@ export default function useAgenda(empresaId) {
     e.preventDefault();
     if (enviandoAcao || !modal || !selecionado) return;
     setErroAcao("");
+    const horarioParaValidar =
+      modal.acao === "REMARCAR"
+        ? modal.data
+        : modal.acao === "CONCLUIR" && modal.agendarRetorno
+          ? modal.retornoHorario
+          : null;
+    if (horarioParaValidar !== null) {
+      const erroHorario = pfErroHorarioAgenda(horarioParaValidar);
+      if (erroHorario) {
+        setErroAcao(erroHorario);
+        return;
+      }
+    }
+
     if (
       modal.acao === "CONCLUIR" &&
       modal.agendarRetorno &&
@@ -517,6 +580,8 @@ export default function useAgenda(empresaId) {
     mudarNovo,
     mudarTelefone,
     buscarContato,
+    selecionarContato,
+    limparContato,
     verHorarios,
     salvarNovo,
     abrirAcao,

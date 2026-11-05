@@ -1,6 +1,6 @@
 import { buildWebhookUrl } from "../../config/globals";
 import { request as fetch } from "../../lib/http";
-import { pfResposta } from "./agendaUtils";
+import { pfResposta, pfMensagemErroAgenda } from "./agendaUtils";
 const PF_AGENDA_ENDPOINT = "prospectflow-agenda";
 export function criarAgendaApi(empresaId, requests) {
   return async (acao, payload = {}) => {
@@ -23,19 +23,14 @@ export function criarAgendaApi(empresaId, requests) {
           "A agenda não retornou JSON. Confira se o novo webhook foi publicado.",
         );
       }
-      if (!r.ok)
-        throw Error(
-          bruto.erro ||
-            bruto.mensagem ||
-            "Não foi possível consultar a agenda.",
-        );
+      if (!r.ok) throw Error(pfMensagemErroAgenda(bruto));
       return pfResposta(bruto, empresaId);
     } catch (e) {
-      if (e.name === "AbortError")
+      if (e?.name === "AbortError")
         throw Error(
           "A resposta demorou. Tente novamente; o mesmo envio não duplica o agendamento.",
         );
-      throw e;
+      throw Error(pfMensagemErroAgenda(e));
     } finally {
       clearTimeout(timeout);
       requests.delete(controller);
